@@ -1,6 +1,6 @@
 import React from 'react';
 import './EmailSend.css';
-import { Button, Input, Form, Radio } from 'antd';
+import { Button, Input, Form } from 'antd';
 
 const EmailSend = () => {
 	const loading = false;
