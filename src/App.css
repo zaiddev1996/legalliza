@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: "OpenSans-Regular";
+  src: local("OpenSans-Regular"),
+    url(./assets//fonts/OpenSans-Regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: "OpenSans-Bold";
+  src: local("OpenSans-Bold"),
+    url(./assets//fonts/OpenSans-Bold.ttf) format("ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-SemiBold";
+  src: local("OpenSans-SemiBold"),
+    url(./assets//fonts/OpenSans-SemiBold.woff) format("woff");
+}

@@ -1,0 +1,69 @@
+.registration {
+    margin-top: 60px;
+}
+
+.registration .property-name {
+    font-family: OpenSans-SemiBold;
+    font-size: 25px;
+    text-align: left;
+    color: #00423A;
+}
+
+.registration .edit-icon {
+    margin-left: 20px;
+}
+
+.registration .delete-button {
+    background-color: #D15757 !important;
+    color: white;
+    height: 42px;
+}
+.registration .farm-name {
+    font-family: OpenSans-Regular;
+    font-size: 11px;
+    color: #00423A;
+    text-align: left;
+    padding: 0%;
+    margin: 0%;
+}
+.registration .line-seperator {
+    height: 1px;
+    width: 100%;
+    background-color: #D8D8D8;
+    margin-top: 32px;
+}
+.registration .new-btn-div {
+    margin-top: 30px;
+}
+.registration .registration-heading {
+    font-family: OpenSans-SemiBold;
+    font-size: 19px;
+    color: #717171;
+}
+.registration .registrations-table {
+    margin-top: 30px;
+}
+.registration .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+    background-color: transparent;
+}
+
+.registration .ant-table-thead > tr > th {
+    background-color: transparent;
+    font-size: 13px;
+    font-family: OpenSans-SemiBold;
+    color: #2F2F2F;
+    line-height: 17.7px;
+}
+
+.registration .ant-table-tbody > tr > td {
+    font-family: OpenSans-Regular;
+    color: #2F2F2F;
+    font-size: 13px;
+    line-height: 20.7px;
+}
+.registration .attachment-image {
+    border-radius: 50%;
+    background-color: #00423A;
+    height: 44px;
+    width: 44px;
+}

@@ -1,0 +1,24 @@
+
+
+.farms-table {
+    margin-top: 30px;
+}
+
+.farms-table .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+    background-color: transparent;
+}
+
+.farms-table .ant-table-thead > tr > th {
+    background-color: transparent;
+    font-size: 13px;
+    font-family: OpenSans-SemiBold;
+    color: #2F2F2F;
+    line-height: 17.7px;
+}
+
+.farms-table .ant-table-tbody > tr > td {
+    font-family: OpenSans-Regular;
+    color: #2F2F2F;
+    font-size: 13px;
+    line-height: 20.7px;
+}

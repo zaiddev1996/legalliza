@@ -1,0 +1,53 @@
+.header-main {
+    background-color: #00423A;
+    height: 64px;
+}
+
+.header-logo {
+    margin-left: 32px;
+   
+}
+
+.logout-text {
+    font-family: OpenSans-Regular;
+    font-size: 14px;
+    color: white;
+    margin-right: 25px;
+}
+
+.ant-tabs-top > .ant-tabs-nav {
+    margin-bottom: 0px !important;
+}
+
+.header-main .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #98C21F !important;
+}
+
+.header-main .ant-tabs-tab.ant-tabs-tab .ant-tabs-tab-btn {
+    color: #98C21F !important;
+    padding-left: 18px;
+    padding-right: 18px;
+    margin-bottom: 8px;
+
+}
+
+.ant-tabs-tab {
+    margin: 0px !important;
+}
+
+.header-main .ant-tabs-top > .ant-tabs-nav::before {
+    border-bottom: none !important;
+}
+
+.header-main .ant-tabs-ink-bar {
+    background: #98C21F !important;
+    height: 4px !important;
+}
+
+.header-main .tab-text {
+    margin-left: 8px !important;
+    font-size: 13px;
+    padding-top: 2px;
+    text-align: end !important;
+    font-family: OpenSans-Regular !important;
+}

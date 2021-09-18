@@ -1,0 +1,104 @@
+.user-details {
+    margin-top: 60px;
+}
+.user-details .user-name {
+    font-family: OpenSans-SemiBold;
+    font-size: 25px;
+    color: #00423A;
+}
+.user-details .edit-icon {
+    margin-left: 20px;
+}
+.user-details .delete-button {
+    background-color: #D15757 !important;
+    color: white;
+    height: 42px;
+}
+.user-details .change-pass-btn {
+    background-color: #0EA6E8;
+    color: white;
+    width: 107px;
+    height: 40px;
+    margin-right: 16px;
+    font-size: 13px;
+    font-family: OpenSans-SemiBold;
+}
+.user-details .change-pass-btn:hover {
+    background-color: #0EA6E8;
+}
+.user-details .contact-info-div {
+    margin-top: 30px;
+}
+.user-details .contact-info-heading {
+    font-size: 11px;
+    font-family: OpenSans-Regular;
+    color: #2F2F2F;
+    text-align: left;
+}
+.user-details .cpf {
+    width: 170px;
+    height: 40px;
+    background-color: #F6F6F6;
+    border-radius: 4px;
+    text-align: left;
+    color: #717171;
+    font-size: 13px;
+    font-family: OpenSans-Regular;
+    align-items: center;
+    line-height: 40px;
+    padding-left: 13px;
+    margin-top: 4px;
+}
+
+.user-details .single-info-div {
+    margin-right: 16px;
+}
+
+.user-details .email {
+    width: 240px;
+}
+.upload-btn {
+    width: 165px !important;
+    height: 107px !important;
+    border: dashed ;
+    border-color: #D8D8D8;
+    border-radius: 8px;
+    border-width: 1px;
+    margin-top: 17px;
+    
+}
+.user-details .upload-text {
+    font-size: 11px;
+    color: #D8D8D8;
+    line-height: 12px;
+    margin-top: 8px;
+    font-family: OpenSans-SemiBold;
+}
+.user-details .uploaded-img {
+    width: 165px;
+    height: 107px;
+    border-radius: 8px;
+    margin-top: 17px;
+    margin-right: 16px;
+    object-fit: cover;
+}
+.user-details .seperator {
+    background-color: #D8D8D8;
+    height: 1px;
+    width: 100%;
+    margin-top: 32px;
+}
+.user-details .heading-light {
+    text-align: left !important;
+    font-size: 19px;
+    font-family: OpenSans-SemiBold;
+    color: #717171;
+    margin-top: 32px;
+}
+.user-details .checkbox-user-details {
+    margin-top: 10px;
+    margin-right: 27px;
+}
+.user-details .extra-top-margin {
+    margin-top: 40px;
+}

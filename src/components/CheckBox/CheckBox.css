@@ -1,0 +1,32 @@
+
+.checkbox-custom .ant-checkbox-checked .ant-checkbox-inner::after{
+    opacity: 0 !important;
+    height: 50% !important;
+    width: 50% !important;
+    margin: 30% !important;
+    border: none !important;
+    font-family: OpenSans-Regular;
+    font-size: 13px;
+    background-color: #00423A !important;
+    transform: rotate(90deg) scale(1.7) translate(-63%, 30%) !important;
+}
+
+.checkbox-custom .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #00423A;
+    border-color: #717171 !important;
+    background-clip: content-box !important;
+    border-radius: 4px;
+    /* outline-color: red !important;
+    outline-width: 1px;
+    outline-style: solid; */
+    padding: 2px !important;
+}
+
+.checkbox-custom .ant-checkbox-inner {
+    border: 1px solid #717171 !important;
+    border-radius: 3px;
+}
+
+.checkbox-custom .ant-checkbox-checked::after {
+    border: none !important;
+}

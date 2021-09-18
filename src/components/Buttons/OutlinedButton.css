@@ -1,0 +1,21 @@
+.outlined-btn-main .custom-btn-outlined {
+  color: #2748fb;
+  border: solid;
+  border-color: #2747fb;
+  border-width: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: "Roboto";
+  text-transform: capitalize;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.outlined-btn-main .custom-btn-outlined:hover {
+  background-color: #2748fb;
+  color: white;
+}
+
+.outlined-btn-main .btn-icon {
+  margin-right: 3px !important;
+}

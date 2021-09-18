@@ -1,0 +1,124 @@
+.farm-details {
+    margin-top: 60px;
+}
+
+.farm-details .farm-name {
+    font-family: OpenSans-SemiBold;
+    font-size: 25px;
+    color: #00423A;
+}
+
+.farm-details .edit-icon {
+    margin-left: 20px;
+}
+
+.farm-details .delete-button {
+    background-color: #D15757 !important;
+    color: white;
+    height: 42px;
+}
+
+.farm-details .farm-detail-div {
+    margin-top: 30px;
+}
+
+.farm-details .select-options {
+    margin-top: 4px;
+}
+
+.farm-details .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    background-color: #F6F6F6 !important;
+    border: none !important;
+    border-radius: 4px !important;
+    height: 40px;
+    padding: 0px !important;
+    box-shadow: none !important;
+}
+
+.farm-details .ant-select-single.ant-select-show-arrow .ant-select-selection-item {
+    color: #717171;
+    font-family: OpenSans-Regular;
+    font-size: 13px;
+    line-height: 40px;
+    text-align: left;
+    margin-left: 13px;
+}
+
+.farm-details .detail-heading {
+    font-family: OpenSans-Regular;
+    font-size: 11px;
+    color: #2F2F2F;
+}
+
+.farm-details .detail-div-left-margin {
+    margin-right: 16px;
+}
+
+.farm-details .state {
+    width: 100px;
+}
+.farm-details .county {
+    width: 200px;
+}
+.farm-details .legal {
+    width: 120px;
+}
+.farm-details .latitude {
+    width: 63px;
+    margin-left: 6px;
+}
+.farm-details .input-location-points {
+    background-color: #F6F6F6 !important;
+    border: none;
+    outline: none;
+    height: 40px;
+    margin-top: 4px;
+    border-radius: 4px;
+    color: #717171;
+    font-family: OpenSans-Regular;
+    font-size: 13px;
+    line-height: 40px;
+    text-align: left;
+    padding-left: 13px;
+}
+.farm-details .degree {
+    width: 46px;
+}
+.farm-details .minutes {
+    width: 46px;
+    margin-left: 6px;
+}
+.farm-details .seconds {
+    width: 63px;
+    margin-left: 6px;
+}
+.farm-details .line-seperator {
+    height: 1px;
+    width: 100%;
+    background-color: #D8D8D8;
+    margin-top: 32px;
+}
+.farm-details .search-bar-div {
+    margin-top: 56px;
+}
+.farm-details .property-table {
+    margin-top: 30px;
+}
+.farm-details .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+    background-color: transparent;
+}
+
+.farm-details .ant-table-thead > tr > th {
+    background-color: transparent;
+    font-size: 13px;
+    font-family: OpenSans-SemiBold;
+    color: #2F2F2F;
+    line-height: 17.7px;
+}
+
+.farm-details .ant-table-tbody > tr > td {
+    font-family: OpenSans-Regular;
+    color: #2F2F2F;
+    font-size: 13px;
+    line-height: 20.7px;
+}

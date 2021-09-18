@@ -1,0 +1,15 @@
+.light-btn-main .custom-btn-solid {
+  color: #2748fb;
+  background-color: #2747fb1c;
+
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: "Roboto";
+  text-transform: capitalize;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+.light-btn-main .custom-btn-solid:hover {
+  background-color: #2747fb1c;
+}

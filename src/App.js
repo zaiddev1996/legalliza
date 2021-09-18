@@ -1,25 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { Switch } from 'react-router-dom';
+import { Dashboard } from './pages/Dashboard/Dashboard';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props) {
+	const getUrl = (pathname) => {
+		let pathArray = pathname.split('/');
+		return `/${pathArray[1]}` === '/'
+			? true
+			: `/${pathArray[1]}` === '/signup'
+				? true
+				: `/${pathArray[1]}` === '/signin' ? true : `/${pathArray[1]}` === '/forget-password' ? true : false;
+	};
+	return (
+		<div className="App">
+			{getUrl(props.location.pathname) ? (
+				<Switch />
+			) : (
+				<div>
+					<Dashboard data={props.location} />
+				</div>
+			)}
+		</div>
+	);
 }
 
 export default App;

@@ -1,0 +1,26 @@
+.search-bar-main {
+    background-color: #F6F6F6;
+    width: 400px;
+    min-width: 100;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 30px;
+}
+
+.search-bar-main .input-search{
+    border: none !important;
+    width: 90%;
+    background-color: transparent;
+    font-family: OpenSans-Regular;
+    font-size: 13px;
+    margin-left: 13px;
+}
+
+.search-bar-main .input-search:focus{
+    outline: none !important;
+    background-color: transparent;
+}
+
+.search-bar-main .search-icon {
+    margin-right: 10px;
+}

@@ -1,0 +1,21 @@
+.solid-btn-main .custom-btn-solid {
+  color: #00423A;
+  background-color: #98C21F;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: OpenSans-SemiBold;
+  text-transform: capitalize;
+  font-size: 13px;
+  border-radius: 4px;
+  height: 40px;
+  border: none;
+}
+
+.solid-btn-main .custom-btn-solid:hover {
+  background-color: #98C21F;
+}
+
+.solid-btn-main .delete-icon {
+  margin-top: 2px;
+  margin-right: 8px;
+}
