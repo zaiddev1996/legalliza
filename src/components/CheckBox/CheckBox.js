@@ -5,7 +5,7 @@ import { Checkbox } from 'antd';
 export function CheckBox({ onChange, text, customStyle, className }) {
 	return (
 		<div className={className}>
-			<Checkbox onChange={onChange} className={`checkbox-custom ${style}`}>
+			<Checkbox onChange={onChange} className={`checkbox-custom ${customStyle}`}>
 				{text}
 			</Checkbox>
 		</div>
