@@ -3,8 +3,6 @@ import './ForgetPassword.css';
 import { Link } from 'react-router-dom';
 import EmailLogo from '../../assets/images/email.svg';
 import SendEmail from '../../components/ForgetPasswordScreens/EmailSend/EmailSend';
-import VerifyCode from '../../components/ForgetPasswordScreens/CodeVerify/CodeVerify';
-import SetNewPassword from '../../components/ForgetPasswordScreens/SetNewPassword/SetNewPassword';
 
 const ForgetPassword = () => {
 	// let step = 0;
