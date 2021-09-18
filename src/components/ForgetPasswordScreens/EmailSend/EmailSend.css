@@ -1,0 +1,95 @@
+@media screen and (min-width: 921px) {
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 920px) {
+}
+
+.email-send-main .create-acc-heading {
+  font-size: 29px;
+  font-family: Avenir-Heavy;
+  margin-top: 105px;
+  align-self: center;
+}
+
+.email-send-main .signup-inputs {
+  border-color: #aaaaaa8e;
+  height: 42px;
+  font-size: 14px;
+  font-family: Avenir-Medium;
+  width: 307px;
+  border-radius: 2px;
+  border-width: 1px;
+}
+
+.email-send-main .ant-form-item {
+  margin-bottom: 0px !important;
+  margin-top: 40px;
+}
+
+.email-send-main .signup-inputs:hover {
+  border-color: #aaaaaa8e;
+}
+
+.email-send-main .signup-inputs:focus {
+  border-color: #118960;
+  box-shadow: #118960;
+}
+
+.email-send-main .btn-signup {
+  background-color: #118960;
+  border: #118960;
+  margin-top: 38px;
+  font-family: Avenir-Heavy;
+  font-size: 15px;
+  height: 42px;
+  width: 171px;
+  border-radius: 2px;
+}
+
+.email-send-main .already-acc-text {
+  font-size: 14px;
+  font-family: Avenir;
+  color: black;
+  margin-top: 15px;
+}
+
+.email-send-main .login-text {
+  color: #118960;
+  font-family: Avenir-Heavy;
+  cursor: pointer;
+}
+
+.email-send-main .suffix-icon {
+  color: #aaaaaa;
+}
+
+.email-send-main .ant-input-affix-wrapper-focused {
+  border-color: #118960 !important;
+  box-shadow: none;
+}
+
+.email-send-main .ant-input {
+  box-shadow: none;
+}
+
+.email-send-main .anticon {
+  color: #aaaaaa;
+}
+
+.email-send-main .forget-pass-text {
+  color: #aaaaaa;
+  text-decoration: underline;
+  width: 307px;
+  text-align: right;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #555555;
+}
+
+.email-send-main .email-send-info {
+  color: #777777;
+  font-size: 15px;
+  font-family: Avenir-Medium;
+  text-align: center;
+}

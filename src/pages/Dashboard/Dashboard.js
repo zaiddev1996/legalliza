@@ -15,8 +15,8 @@ export function Dashboard(props) {
 			<Header />
 			<div className="dashboard-content-main">
 				<Switch>
-					<Route exact path="/" component={FarmDash} />
 					<Route exact path="/farms" component={FarmDash} />
+					<Route exact path="/dashboard" component={FarmDash} />
 					<Route exact path="/farmers" component={UserDash} />
 					<Route exact path="/farm-details" component={FarmDetails} />
 					<Route exact path="/property-details" component={PropertyDetails} />
