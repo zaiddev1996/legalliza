@@ -99,22 +99,22 @@ export function UserDash() {
 		{
 			title: 'Gestão Usuários',
 			dataIndex: 'user_management',
-			render: () => <CheckBox onChange={() => {}} style={'checkbox-style-light'} />
+			render: () => <CheckBox onChange={() => {}} customStyle={'checkbox-style-light'} />
 		},
 		{
 			title: 'Gestão Fazendas',
 			dataIndex: 'farm_management',
-			render: () => <CheckBox onChange={() => {}} style={'checkbox-style-light'} />
+			render: () => <CheckBox onChange={() => {}} customStyle={'checkbox-style-light'} />
 		},
 		{
 			title: 'Gestão Documentos',
 			dataIndex: 'documnets_management',
-			render: () => <CheckBox onChange={() => {}} style={'checkbox-style-light'} />
+			render: () => <CheckBox onChange={() => {}} customStyle={'checkbox-style-light'} />
 		},
 		{
 			title: 'Acesso Aplicativo',
 			dataIndex: 'appliaction_access',
-			render: () => <CheckBox onChange={() => {}} style={'checkbox-style-light'} />
+			render: () => <CheckBox onChange={() => {}} customStyle={'checkbox-style-light'} />
 		},
 		{
 			title: '',
@@ -132,7 +132,7 @@ export function UserDash() {
 			dataIndex: 'name',
 			render: () => (
 				<div className="d-flex">
-					<CheckBox className="align-self-center" style={'checkbox-style mt-0'} />
+					<CheckBox className="align-self-center" customStyle={'checkbox-style mt-0'} />
 					<div className="d-flex flex-column">
 						<text className="permission-field-1">Fazenda São Miguel</text>
 						<text className="permission-field-2">Jaraguá do Sul/GO</text>
@@ -157,7 +157,7 @@ export function UserDash() {
 			dataIndex: 'name',
 			render: () => (
 				<div className="d-flex">
-					<CheckBox className="align-self-center" style={'checkbox-style mt-0'} />
+					<CheckBox className="align-self-center" customStyle={'checkbox-style mt-0'} />
 					<text className="permission-field-1">Rancho Fundo I</text>
 				</div>
 			)
@@ -206,43 +206,43 @@ export function UserDash() {
 						<div className="container">
 							<div className="row">
 								<div className="col-3 documents-col">
-									<CheckBox text="Matrícula" style={'checkbox-style'} />
+									<CheckBox text="Matrícula" customStyle={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="GEO" style={'checkbox-style'} />
+									<CheckBox text="GEO" customStyle={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="CCIR" style={'checkbox-style'} />
-								</div>
-							</div>
-							<div className="row">
-								<div className="col-3 documents-col">
-									<CheckBox text="CAR" style={'checkbox-style'} />
-								</div>
-								<div className="col-3 documents-col">
-									<CheckBox text="LAR" style={'checkbox-style'} />
-								</div>
-								<div className="col-3 documents-col">
-									<CheckBox text="Outorga" style={'checkbox-style'} />
+									<CheckBox text="CCIR" customStyle={'checkbox-style'} />
 								</div>
 							</div>
 							<div className="row">
 								<div className="col-3 documents-col">
-									<CheckBox text="ITR" style={'checkbox-style'} />
+									<CheckBox text="CAR" customStyle={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="ADA" style={'checkbox-style'} />
+									<CheckBox text="LAR" customStyle={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="Laudo" style={'checkbox-style'} />
+									<CheckBox text="Outorga" customStyle={'checkbox-style'} />
 								</div>
 							</div>
 							<div className="row">
 								<div className="col-3 documents-col">
-									<CheckBox text="GSSMATR" style={'checkbox-style'} />
+									<CheckBox text="ITR" customStyle={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="LTCAT" style={'checkbox-style'} />
+									<CheckBox text="ADA" customStyle={'checkbox-style'} />
+								</div>
+								<div className="col-3 documents-col">
+									<CheckBox text="Laudo" customStyle={'checkbox-style'} />
+								</div>
+							</div>
+							<div className="row">
+								<div className="col-3 documents-col">
+									<CheckBox text="GSSMATR" customStyle={'checkbox-style'} />
+								</div>
+								<div className="col-3 documents-col">
+									<CheckBox text="LTCAT" customStyle={'checkbox-style'} />
 								</div>
 							</div>
 						</div>
@@ -294,7 +294,7 @@ export function UserDash() {
 							<CheckBox
 								text={'Selecionar Todos'}
 								className="align-self-center"
-								style={'checkbox-style mt-0'}
+								customStyle={'checkbox-style mt-0'}
 							/>
 						</div>
 						<Table
