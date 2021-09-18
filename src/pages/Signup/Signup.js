@@ -1,6 +1,6 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import Zain from '../../assets/images/signin-background.png';
-import { Button, Input, Form, Radio, DatePicker } from 'antd';
+import { Button, Input, Form, Radio } from 'antd';
 import './Signup.css';
 import { Link } from 'react-router-dom';
 import { message } from 'antd';
@@ -25,6 +25,7 @@ const Signup = () => {
 	// }
 
 	const signup = (e) => {
+		notify();
 		History.push({
 			pathname: '/dashboard'
 		});
