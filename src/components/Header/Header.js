@@ -21,6 +21,12 @@ export function Header() {
 				history.push({
 					pathname: '/farmers'
 				});
+				break;
+			default:
+				history.push({
+					pathname: '/farms'
+				});
+				break;
 		}
 	}
 	return (

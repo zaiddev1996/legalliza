@@ -99,22 +99,22 @@ export function UserDash() {
 		{
 			title: 'Gestão Usuários',
 			dataIndex: 'user_management',
-			render: () => <CheckBox onChange={() => {}} style="checkbox-style-light" />
+			render: () => <CheckBox onChange={() => {}} style={'checkbox-style-light'} />
 		},
 		{
 			title: 'Gestão Fazendas',
 			dataIndex: 'farm_management',
-			render: () => <CheckBox onChange={() => {}} style="checkbox-style-light" />
+			render: () => <CheckBox onChange={() => {}} style={'checkbox-style-light'} />
 		},
 		{
 			title: 'Gestão Documentos',
 			dataIndex: 'documnets_management',
-			render: () => <CheckBox onChange={() => {}} style="checkbox-style-light" />
+			render: () => <CheckBox onChange={() => {}} style={'checkbox-style-light'} />
 		},
 		{
 			title: 'Acesso Aplicativo',
 			dataIndex: 'appliaction_access',
-			render: () => <CheckBox onChange={() => {}} style="checkbox-style-light" />
+			render: () => <CheckBox onChange={() => {}} style={'checkbox-style-light'} />
 		},
 		{
 			title: '',
@@ -206,43 +206,43 @@ export function UserDash() {
 						<div className="container">
 							<div className="row">
 								<div className="col-3 documents-col">
-									<CheckBox text="Matrícula" style="checkbox-style" />
+									<CheckBox text="Matrícula" style={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="GEO" style="checkbox-style" />
+									<CheckBox text="GEO" style={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="CCIR" style="checkbox-style" />
-								</div>
-							</div>
-							<div className="row">
-								<div className="col-3 documents-col">
-									<CheckBox text="CAR" style="checkbox-style" />
-								</div>
-								<div className="col-3 documents-col">
-									<CheckBox text="LAR" style="checkbox-style" />
-								</div>
-								<div className="col-3 documents-col">
-									<CheckBox text="Outorga" style="checkbox-style" />
+									<CheckBox text="CCIR" style={'checkbox-style'} />
 								</div>
 							</div>
 							<div className="row">
 								<div className="col-3 documents-col">
-									<CheckBox text="ITR" style="checkbox-style" />
+									<CheckBox text="CAR" style={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="ADA" style="checkbox-style" />
+									<CheckBox text="LAR" style={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="Laudo" style="checkbox-style" />
+									<CheckBox text="Outorga" style={'checkbox-style'} />
 								</div>
 							</div>
 							<div className="row">
 								<div className="col-3 documents-col">
-									<CheckBox text="GSSMATR" style="checkbox-style" />
+									<CheckBox text="ITR" style={'checkbox-style'} />
 								</div>
 								<div className="col-3 documents-col">
-									<CheckBox text="LTCAT" style="checkbox-style" />
+									<CheckBox text="ADA" style={'checkbox-style'} />
+								</div>
+								<div className="col-3 documents-col">
+									<CheckBox text="Laudo" style={'checkbox-style'} />
+								</div>
+							</div>
+							<div className="row">
+								<div className="col-3 documents-col">
+									<CheckBox text="GSSMATR" style={'checkbox-style'} />
+								</div>
+								<div className="col-3 documents-col">
+									<CheckBox text="LTCAT" style={'checkbox-style'} />
 								</div>
 							</div>
 						</div>

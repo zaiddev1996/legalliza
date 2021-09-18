@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './SolidPrimaryButton.css';
 import { Button } from 'antd';
 import { ReactComponent as DeleteIcon } from '../../assets/images/delete-icon-white.svg';

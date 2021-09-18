@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './SolidPrimaryButton.css';
 import { Button } from 'antd';
-import { DeleteFilled } from '@ant-design/icons';
 
 export default function SolidPrimaryButton({ text, className, btnStyle, onClick, type, loading, startIcon }) {
 	return (

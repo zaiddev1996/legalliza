@@ -57,7 +57,7 @@ export function Registration() {
 			dataIndex: 'attachments',
 			render: (url) => (
 				<div>
-					<img src={url} className="attachment-image" />
+					<img src={url} alt={'sad'} className="attachment-image" />
 				</div>
 			)
 		},
