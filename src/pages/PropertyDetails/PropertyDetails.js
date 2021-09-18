@@ -55,8 +55,8 @@ export function PropertyDetails() {
 				</div>
 				<ButtonWithIcon text={'Excluir Imóvel'} onClick={() => {}} btnStyle={'delete-button'} />
 			</div>
-			<div className="d-flex property-detail-div">
-				<div className="d-flex flex-column">
+			<div className="d-flex flex-wrap property-detail-div">
+				<div className="d-flex flex-column detail-div-left-margin">
 					<span className="align-self-start detail-heading">Estado:</span>
 					<Select defaultValue="SC" className="select-options state">
 						<Option value="SC">SC</Option>
