@@ -3,7 +3,7 @@ import './UserDash.css';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import SolidPrimaryButton from '../../components/Buttons/SolidPrimaryButton';
 import History from '../../@history';
-import { Table } from 'antd';
+import { Table, Popconfirm } from 'antd';
 import { CheckBox } from '../../components/CheckBox/CheckBox';
 import { ReactComponent as DeleteBtn } from '../../assets/images/delete-icon-white.svg';
 import { useState } from 'react';
@@ -11,9 +11,32 @@ import { Modal } from 'antd';
 import { ReactComponent as FileIcon } from '../../assets/images/file-icon.svg';
 import { ReactComponent as FarmIcon } from '../../assets/images/farm-icon.svg';
 
+const dataSource = [
+	{
+		key: '1',
+		name: 'Fazenda São Miguel',
+		cpf: '082.159.119-35'
+	},
+	{
+		key: '2',
+		name: 'Fazenda São Miguel',
+		cpf: '082.159.119-35'
+	},
+	{
+		key: '3',
+		name: 'Fazenda São Miguel',
+		cpf: '082.159.119-35'
+	},
+	{
+		key: '4',
+		name: 'Fazenda São Miguel',
+		cpf: '082.159.119-35'
+	}
+];
 export function UserDash() {
 	const [ isFirstModalVisible, setIsFirstModalVisible ] = useState(false);
 	const [ isSecondModalVisible, setIsSecondModalVisible ] = useState(false);
+	const [ userRows, setUserRows ] = useState(dataSource);
 
 	const showFirstModal = () => {
 		setIsFirstModalVisible(true);
@@ -62,29 +85,6 @@ export function UserDash() {
 		}
 	];
 
-	const dataSource = [
-		{
-			key: '1',
-			name: 'Fazenda São Miguel',
-			cpf: '082.159.119-35'
-		},
-		{
-			key: '2',
-			name: 'Fazenda São Miguel',
-			cpf: '082.159.119-35'
-		},
-		{
-			key: '3',
-			name: 'Fazenda São Miguel',
-			cpf: '082.159.119-35'
-		},
-		{
-			key: '4',
-			name: 'Fazenda São Miguel',
-			cpf: '082.159.119-35'
-		}
-	];
-
 	const columns = [
 		{
 			title: 'Nome',
@@ -119,9 +119,11 @@ export function UserDash() {
 		{
 			title: '',
 			dataIndex: 'action',
-			render: () => (
+			render: (_, record) => (
 				<div>
-					<DeleteBtn className="delete-btn" fill="#D15757" />
+					<Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+						<DeleteBtn className="delete-btn" fill="#D15757" />
+					</Popconfirm>
 				</div>
 			)
 		}
@@ -168,6 +170,11 @@ export function UserDash() {
 			render: () => <text className="permission-field-1">Formosa/GO</text>
 		}
 	];
+	const handleDelete = (key) => {
+		const data = userRows.filter((item) => item.key !== key);
+		console.log(data);
+		setUserRows(data);
+	};
 	return (
 		<div className="farmer-dashboard">
 			<div className="d-flex justify-content-between">
@@ -179,7 +186,7 @@ export function UserDash() {
 					}}
 				/>
 			</div>
-			<Table dataSource={dataSource} columns={columns} className="farmers-table" />
+			<Table dataSource={userRows} columns={columns} className="farmers-table" />
 			<Modal
 				title={null}
 				content={null}

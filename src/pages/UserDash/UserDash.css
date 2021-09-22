@@ -1,5 +1,6 @@
 .farmers-table {
     margin-top: 30px;
+    overflow: scroll;
 }
 
 .farmers-table .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
@@ -137,4 +138,7 @@
     font-size: 11px;
     margin-left: 23px;
     font-family: OpenSans-Regular;
+}
+.farmers-table .delete-btn {
+    cursor: pointer;
 }

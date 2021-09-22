@@ -55,7 +55,16 @@ export function Header() {
 				</Tabs>
 			</div>
 
-			<span className="logout-text">SAIR</span>
+			<span
+				className="logout-text"
+				onClick={() => {
+					history.push({
+						pathname: '/'
+					});
+				}}
+			>
+				SAIR
+			</span>
 		</div>
 	);
 }

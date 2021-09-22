@@ -13,6 +13,7 @@
     font-size: 14px;
     color: white;
     margin-right: 25px;
+    cursor: pointer;
 }
 
 .ant-tabs-top > .ant-tabs-nav {
