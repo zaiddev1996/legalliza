@@ -1,18 +1,12 @@
 import { React, useState } from 'react';
-import { Button, Input, Form, Radio } from 'antd';
+import { Button, Input, Form } from 'antd';
 import './Signup.css';
-import { Link } from 'react-router-dom';
 import { message } from 'antd';
 import History from '../../@history';
 import { useSignup } from '../../hooks/signin-signup/useSignup';
 
 const Signup = (props) => {
 	const [ loading, setLoading ] = useState(false);
-
-	const notify = () => {
-		message.success('Signed up');
-	};
-
 	const { signup } = useSignup();
 
 	// if (signupResponse != null) {

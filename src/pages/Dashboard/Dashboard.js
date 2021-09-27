@@ -12,8 +12,8 @@ import { useCheckLoginState } from '../../hooks/signin-signup/useCheckLoginState
 import { ManageAdmins } from '../ManageAdmins/ManageAdmins';
 import Signup from '../Signup/Signup';
 
-export function Dashboard(props) {
-	const checkLoginState = useCheckLoginState();
+export function Dashboard() {
+	useCheckLoginState();
 
 	return (
 		<div className="dashboard-main">

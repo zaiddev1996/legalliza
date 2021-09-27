@@ -19,7 +19,7 @@ export function ManageAdmins() {
 	};
 	return (
 		<div>
-			{accessLevelType == 'SuperAdmin' ? (
+			{accessLevelType === 'SuperAdmin' ? (
 				<div>
 					<SolidPrimaryButton text="Adicionar Admin" onClick={() => onAddAdmin('Admin')} />
 					<SolidPrimaryButton text="Adicionar usuário" className="mt-5" onClick={() => onAddAdmin('User')} />

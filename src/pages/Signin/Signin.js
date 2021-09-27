@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Zain from '../../assets/images/signin-background.png';
 import './Signin.css';
 import { Button, Input, Form, message } from 'antd';
-import { Link } from 'react-router-dom';
 import History from '../../@history';
 import { useSignin } from '../../hooks/signin-signup/useSignin';
 

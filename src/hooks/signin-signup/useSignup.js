@@ -1,10 +1,8 @@
-// import firebase from '../../firebase';
-import firebase from '../../firebase';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
 
 export function useSignup() {
-	const auth = getAuth(firebase);
+	const auth = getAuth();
 	const db = getFirestore();
 
 	const signup = (name, email, password, type) =>
@@ -28,7 +26,6 @@ export function useSignup() {
 				})
 				.catch((error) => {
 					const errorCode = error.code;
-					const errorMessage = error.message;
 					reject(errorCode);
 				});
 		});

@@ -1,6 +1,4 @@
-// import firebase from '../../firebase';
-import firebase from '../../firebase';
-import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 export function useSignin() {
@@ -17,7 +15,7 @@ export function useSignin() {
 					getDoc(docRef)
 						.then((doc) => {
 							if (doc.exists()) {
-								if (doc.data().type == 'User') {
+								if (doc.data().type === 'User') {
 									reject("This account doesn't have admin access");
 								} else {
 									resolve();
