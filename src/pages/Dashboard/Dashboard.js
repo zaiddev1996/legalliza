@@ -8,8 +8,13 @@ import { PropertyDetails } from '../PropertyDetails/PropertyDetails';
 import { Registration } from '../Registration/Registration';
 import './Dashboard.css';
 import { UserDetails } from '../UserDetails/UserDetails';
+import { useCheckLoginState } from '../../hooks/signin-signup/useCheckLoginState';
+import { ManageAdmins } from '../ManageAdmins/ManageAdmins';
+import Signup from '../Signup/Signup';
 
 export function Dashboard(props) {
+	const checkLoginState = useCheckLoginState();
+
 	return (
 		<div className="dashboard-main">
 			<Header />
@@ -22,6 +27,8 @@ export function Dashboard(props) {
 					<Route exact path="/property-details" component={PropertyDetails} />
 					<Route exact path="/registration" component={Registration} />
 					<Route exact path="/user-details" component={UserDetails} />
+					<Route exact path="/add-admins" component={ManageAdmins} />
+					<Route exact path="/signup/:type" component={Signup} />
 				</Switch>
 			</div>
 		</div>

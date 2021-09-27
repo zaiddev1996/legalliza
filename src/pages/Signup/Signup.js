@@ -1,17 +1,19 @@
-import { React } from 'react';
-import Zain from '../../assets/images/signin-background.png';
+import { React, useState } from 'react';
 import { Button, Input, Form, Radio } from 'antd';
 import './Signup.css';
 import { Link } from 'react-router-dom';
 import { message } from 'antd';
 import History from '../../@history';
+import { useSignup } from '../../hooks/signin-signup/useSignup';
 
-const Signup = () => {
-	const loading = false;
+const Signup = (props) => {
+	const [ loading, setLoading ] = useState(false);
 
 	const notify = () => {
 		message.success('Signed up');
 	};
+
+	const { signup } = useSignup();
 
 	// if (signupResponse != null) {
 	// 	if (signupResponse.success == true) {
@@ -24,11 +26,21 @@ const Signup = () => {
 	// 	}
 	// }
 
-	const signup = (e) => {
-		notify();
-		History.push({
-			pathname: '/dashboard'
-		});
+	const onSignup = (e) => {
+		setLoading(true);
+		signup(e.name, e.email_address, e.password, props.match.params.type).then(
+			function(rsp) {
+				setLoading(false);
+				message.success(rsp);
+				History.push({
+					pathname: '/dashboard'
+				});
+			},
+			function(error) {
+				setLoading(false);
+				message.error(error);
+			}
+		);
 	};
 
 	// function onDateChange(e) {
@@ -38,10 +50,7 @@ const Signup = () => {
 	return (
 		<div className="ms-0 mr-0 container signup-main">
 			<div className="row">
-				<div className="col-md-5  left-col d-none d-md-block">
-					<img alt="background_img" src={Zain} className="img-background" />
-				</div>
-				<div className="col-md-7  right-col">
+				<div>
 					<div className="d-flex justify-content-between signup-header">
 						{/* <div>
 							<Link to="/" className="d-flex flex-wrap align-items-center logo-div">
@@ -53,11 +62,11 @@ const Signup = () => {
 						</div> */}
 					</div>
 					<div className="d-flex justify-content-center flex-column">
-						<p className="create-acc-heading">Create new account</p>
-						<Form onFinish={(e) => signup(e)} className="signup-form">
+						<p className="create-acc-heading">Create new {props.match.params.type} account</p>
+						<Form onFinish={(e) => onSignup(e)} className="signup-form">
 							<div className="d-flex flex-column align-items-center inputs-div">
 								<Form.Item
-									name="first_name"
+									name="name"
 									rules={[
 										{
 											required: true,
@@ -65,18 +74,7 @@ const Signup = () => {
 										}
 									]}
 								>
-									<Input placeholder="First Name" className="signup-inputs" />
-								</Form.Item>
-								<Form.Item
-									name="last_name"
-									rules={[
-										{
-											required: true,
-											message: 'Please input your Last Name!'
-										}
-									]}
-								>
-									<Input placeholder="Last Name" className="signup-inputs" />
+									<Input placeholder="Full Name" className="signup-inputs" />
 								</Form.Item>
 								<Form.Item
 									name="email_address"
@@ -93,28 +91,7 @@ const Signup = () => {
 								>
 									<Input placeholder="Email Address" className="signup-inputs" />
 								</Form.Item>
-								{/* <Form.Item
-									name="phone_number"
-									rules={[
-										{
-											required: true,
-											message: 'Please input your Phone Number!'
-										}
-									]}
-								>
-									<Input placeholder="Phone Number" className="signup-inputs" />
-								</Form.Item>
-								<Form.Item
-									name="date_of_birth"
-									rules={[
-										{
-											required: true,
-											message: 'Please select your Date of Birth!'
-										}
-									]}
-								>
-									<DatePicker className="signup-inputs" placeholder="Date of Birth" />
-								</Form.Item> */}
+
 								<Form.Item
 									name="password"
 									rules={[
@@ -148,28 +125,13 @@ const Signup = () => {
 								>
 									<Input.Password placeholder="Re Enter" className="signup-inputs" />
 								</Form.Item>
-								<Form.Item
-									name="gender"
-									rules={[
-										{
-											required: true,
-											message: 'Please Select your Gender!'
-										}
-									]}
-								>
-									<Radio.Group>
-										<Radio value="male">Male</Radio>
-										<Radio value="female">Female</Radio>
-										<Radio value="other">Other</Radio>
-									</Radio.Group>
-								</Form.Item>
 
-								<p className="already-acc-text">
+								{/* <p className="already-acc-text">
 									Already have an account?{' '}
 									<Link className="login-text" to="/signin">
 										Login
 									</Link>
-								</p>
+								</p> */}
 								{loading ? (
 									<Button type="primary" className="btn-signup" loading>
 										Signup

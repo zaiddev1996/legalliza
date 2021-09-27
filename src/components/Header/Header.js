@@ -22,6 +22,11 @@ export function Header() {
 					pathname: '/farmers'
 				});
 				break;
+			case '3':
+				history.push({
+					pathname: '/add-admins'
+				});
+				break;
 			default:
 				history.push({
 					pathname: '/farms'
@@ -51,6 +56,15 @@ export function Header() {
 							</div>
 						}
 						key="2"
+					/>
+					<TabPane
+						tab={
+							<div className="d-flex">
+								<UserTabLogo />
+								<span className="tab-text">Adicionar administrador / usuários</span>
+							</div>
+						}
+						key="3"
 					/>
 				</Tabs>
 			</div>
