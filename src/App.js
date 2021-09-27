@@ -1,4 +1,5 @@
 import './App.css';
+import firebase from './firebase';
 import { Switch, Route } from 'react-router-dom';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import Signin from './pages/Signin/Signin';
@@ -6,6 +7,7 @@ import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
 
 function App(props) {
 	const getUrl = (pathname) => {
+		firebase();
 		let pathArray = pathname.split('/');
 		return `/${pathArray[1]}` === '/'
 			? true
