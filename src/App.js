@@ -2,7 +2,6 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import Signin from './pages/Signin/Signin';
-import Signup from './pages/Signup/Signup';
 import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
 
 function App(props) {

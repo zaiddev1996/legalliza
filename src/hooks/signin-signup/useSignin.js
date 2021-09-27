@@ -30,7 +30,6 @@ export function useSignin() {
 				})
 				.catch((error) => {
 					const errorCode = error.code;
-					const errorMessage = error.message;
 					console.log(error);
 					if (errorCode === 'auth/user-not-found') {
 						reject('User not found');
