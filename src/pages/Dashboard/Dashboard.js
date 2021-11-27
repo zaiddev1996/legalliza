@@ -21,12 +21,15 @@ export function Dashboard() {
 			<div className="dashboard-content-main">
 				<Switch>
 					<Route exact path="/farms" component={FarmDash} />
+					<Route exact path="/" component={FarmDash} />
 					<Route exact path="/dashboard" component={FarmDash} />
 					<Route exact path="/farmers" component={UserDash} />
+					<Route exact path="/farm-details/:id" component={FarmDetails} />
 					<Route exact path="/farm-details" component={FarmDetails} />
-					<Route exact path="/property-details" component={PropertyDetails} />
+					<Route exact path="/property-details/:farmName/:farmId" component={PropertyDetails} />
+					<Route exact path="/property-details/:farmName/:farmId/:propertyId" component={PropertyDetails} />
 					<Route exact path="/registration" component={Registration} />
-					<Route exact path="/user-details" component={UserDetails} />
+					<Route exact path="/user-details/:userId" component={UserDetails} />
 					<Route exact path="/add-admins" component={ManageAdmins} />
 					<Route exact path="/signup/:type" component={Signup} />
 				</Switch>

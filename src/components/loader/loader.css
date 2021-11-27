@@ -1,0 +1,14 @@
+.loader-modal .ant-modal-content {
+	background-color: transparent !important;
+	box-shadow: none !important;
+}
+
+.loader-modal .ant-modal-close-x {
+	display: none;
+}
+
+.loader-modal .ant-modal-body {
+	background-color: transparent !important;
+	display: flex;
+	justify-content: center;
+}

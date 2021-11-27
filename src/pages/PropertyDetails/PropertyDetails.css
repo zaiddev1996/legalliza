@@ -1,165 +1,192 @@
 .property-details {
-    margin-top: 60px;
+	margin-top: 60px;
 }
 
 .property-details .property-name {
-    font-family: OpenSans-SemiBold;
-    font-size: 25px;
-    color: #00423A;
+	font-family: OpenSans-SemiBold;
+	font-size: 25px;
+	color: #00423a;
+	border: none;
 }
 
 .property-details .edit-icon {
-    margin-left: 20px;
+	margin-left: 20px;
 }
 
 .property-details .delete-button {
-    background-color: #D15757 !important;
-    color: white;
-    height: 42px;
+	background-color: #d15757 !important;
+	color: white;
+	height: 42px;
+	margin-left: 8px;
 }
 .property-details .farm-name {
-    font-family: OpenSans-Regular;
-    font-size: 11px;
-    color: #00423A;
-    text-align: left;
-    padding: 0%;
-    margin: 0%;
+	font-family: OpenSans-Regular;
+	font-size: 11px;
+	color: #00423a;
+	text-align: left;
+	padding: 0%;
+	margin: 0%;
 }
 .property-details .property-detail-div {
-    margin-top: 30px;
+	margin-top: 30px;
 }
 
 .property-details .select-options {
-    margin-top: 4px;
+	margin-top: 4px;
 }
 
 .property-details .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-    background-color: #F6F6F6 !important;
-    border: none !important;
-    border-radius: 4px !important;
-    height: 40px;
-    padding: 0px !important;
-    box-shadow: none !important;
+	background-color: #f6f6f6 !important;
+	border: none !important;
+	border-radius: 4px !important;
+	height: 40px;
+	padding: 0px !important;
+	box-shadow: none !important;
 }
 
 .property-details .ant-select-single.ant-select-show-arrow .ant-select-selection-item {
-    color: #717171;
-    font-family: OpenSans-Regular;
-    font-size: 13px;
-    line-height: 40px;
-    text-align: left;
-    margin-left: 13px;
+	color: #717171;
+	font-family: OpenSans-Regular;
+	font-size: 13px;
+	line-height: 40px;
+	text-align: left;
+	margin-left: 13px;
 }
 
 .property-details .detail-heading {
-    font-family: OpenSans-Regular;
-    font-size: 11px;
-    color: #2F2F2F;
+	font-family: OpenSans-Regular;
+	font-size: 11px;
+	color: #2f2f2f;
 }
 
 .property-details .detail-div-left-margin {
-    margin-right: 16px;
+	margin-right: 16px;
 }
 
 .property-details .state {
-    width: 100px;
+	width: 100px;
 }
 .property-details .county {
-    width: 200px;
+	width: 200px;
 }
 .property-details .legal {
-    width: 120px;
+	width: 120px;
 }
 .property-details .latitude {
-    width: 63px;
-    margin-left: 6px;
+	width: 63px;
+	margin-left: 6px;
 }
 .property-details .input-location-points {
-    background-color: #F6F6F6 !important;
-    border: none;
-    outline: none;
-    height: 40px;
-    margin-top: 4px;
-    border-radius: 4px;
-    color: #717171;
-    font-family: OpenSans-Regular;
-    font-size: 13px;
-    line-height: 40px;
-    text-align: left;
-    padding-left: 13px;
+	background-color: #f6f6f6 !important;
+	border: none;
+	outline: none;
+	height: 40px;
+	margin-top: 4px;
+	border-radius: 4px;
+	color: #717171;
+	font-family: OpenSans-Regular;
+	font-size: 13px;
+	line-height: 40px;
+	text-align: left;
+	padding-left: 13px;
 }
 .property-details .degree {
-    width: 46px;
+	width: 46px;
 }
 .property-details .minutes {
-    width: 46px;
-    margin-left: 6px;
+	width: 46px;
+	margin-left: 6px;
 }
 .property-details .seconds {
-    width: 63px;
-    margin-left: 6px;
+	width: 63px;
+	margin-left: 6px;
 }
 .property-details .line-seperator {
-    height: 1px;
-    width: 100%;
-    background-color: #D8D8D8;
-    margin-top: 32px;
+	height: 1px;
+	width: 100%;
+	background-color: #d8d8d8;
+	margin-top: 32px;
 }
 .property-details .documents-div {
-    margin-top: 32px;
+	margin-top: 32px;
 }
 .property-details .left-col {
-    padding-left: 0px;
+	padding-left: 0px;
 }
 .property-details .user-table {
-    margin-top: 30px;
+	margin-top: 30px;
 }
-.property-details .ant-table-thead > tr > th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
-    background-color: transparent;
+.property-details
+	.ant-table-thead
+	> tr
+	> th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+	background-color: transparent;
 }
 
 .property-details .ant-table-thead > tr > th {
-    background-color: transparent;
-    font-size: 13px;
-    font-family: OpenSans-SemiBold;
-    color: #2F2F2F;
-    line-height: 17.7px;
+	background-color: transparent;
+	font-size: 13px;
+	font-family: OpenSans-SemiBold;
+	color: #2f2f2f;
+	line-height: 17.7px;
 }
 
 .property-details .ant-table-tbody > tr > td {
-    font-family: OpenSans-Regular;
-    color: #2F2F2F;
-    font-size: 13px;
-    line-height: 20.7px;
+	font-family: OpenSans-Regular;
+	color: #2f2f2f;
+	font-size: 13px;
+	line-height: 20.7px;
 }
 .property-details .documents-heading {
-    font-family: OpenSans-SemiBold;
-    font-size: 25px;
-    text-align: left;
+	font-family: OpenSans-SemiBold;
+	font-size: 25px;
+	text-align: left;
+	margin-top: 20px;
 }
-.property-details .right-col {
-    padding-left: 30px;
-    padding-right: 0%;
-}
+/* .property-details .right-col {
+	padding-left: 30px;
+	padding-right: 0%;
+} */
 .property-details .document {
-    background-color: #F6F6F6;
-    border-radius: 8px;
-    height: 56px;
-    margin-top: 10px;
-    margin-left: 5px;
-    width: 125px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
+	background-color: #f6f6f6;
+	border-radius: 8px;
+	height: 56px;
+	/* margin-top: 10px; */
+	/* padding: 5px; */
+	/* margin-left: 5px; */
+	/* width: 125px; */
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-family: OpenSans-Regular;
+	font-size: 13px;
+	vertical-align: middle;
+	color: #00423a;
+	align-self: center;
 }
 .property-details .documents-container {
-    padding-left: 0%;
+	margin-top: 20px;
 }
 .property-details .document-text {
-    font-family: OpenSans-Regular;
-    font-size: 13px;
-    vertical-align: middle;
-    color: #00423A;
-    align-self: center;
+	font-family: OpenSans-Regular;
+	font-size: 13px;
+	vertical-align: middle;
+	color: #00423a;
+	align-self: center;
+}
+
+.property-details .ant-radio-button-wrapper:first-child:last-child {
+	border-radius: 8px;
+	border: none;
+}
+
+.property-details .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+	background-color: #98c21f;
+	border: none;
+}
+
+.property-details .create-button {
+	background-color: #98c21f !important;
+	height: 42px;
 }

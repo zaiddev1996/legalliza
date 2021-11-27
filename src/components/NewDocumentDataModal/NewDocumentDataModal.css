@@ -1,0 +1,51 @@
+.document-data-modal .ant-modal-content {
+	background-color: transparent !important;
+	box-shadow: none !important;
+}
+
+.document-data-modal .ant-modal-close-x {
+	/* display: none; */
+	margin-right: 25px;
+	margin-top: 25px;
+	font-size: 18px;
+	color: black;
+}
+
+.document-data-modal .ant-modal-body {
+	background-color: transparent !important;
+	display: flex;
+	justify-content: center;
+}
+
+.document-data-modal .main-div {
+	background-color: white;
+	border-radius: 8px;
+	width: 500px;
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	padding-top: 60px;
+}
+
+.document-data-modal .comment-input {
+	border-radius: 8px;
+}
+
+.document-data-modal .file-input {
+	align-self: flex-end;
+}
+
+.document-data-modal .upload-btn {
+	width: 100% !important;
+	height: 40px !important;
+	margin: 0px;
+	margin-top: 30px;
+	border: none;
+}
+
+.document-data-modal .upload-btn-style {
+	width: 100% !important;
+	height: 40px !important;
+	margin: 0px;
+	color: white;
+}

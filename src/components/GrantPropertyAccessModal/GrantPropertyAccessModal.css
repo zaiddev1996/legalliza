@@ -32,116 +32,120 @@
 	background-color: #717171 !important;
 }
 
-/* .custom-dial .ant-modal-content {
-    background-color: transparent !important;
+.custom-dial .ant-modal-content {
+	background-color: transparent !important;
 }
 .custom-dial .ant-modal-body {
-    padding: 0% !important;
+	padding: 0% !important;
 }
 
 .custom-dial .custom-modal-header {
-    background-color: white;
-    width: 540px;
-    height: 54px;
-    border-radius: 8px;
+	background-color: white;
+	width: 540px;
+	height: 54px;
+	border-radius: 8px;
 }
 
 .custom-dial .custom-modal-header-2 {
-    background-color: white;
-    width: 640px;
-    height: 54px;
-    border-radius: 8px;
+	background-color: white;
+	width: 640px;
+	height: 54px;
+	border-radius: 8px;
 }
 
 .custom-dial .header-icon-modal {
-    margin-left: 32px;
+	margin-left: 32px;
 }
 
 .custom-dial .header-title-text {
-    font-family: OpenSans-SemiBold;
-    font-size: 19px;
-    color: #46A23E;
-    margin-left: 12px;
+	font-family: OpenSans-SemiBold;
+	font-size: 19px;
+	color: #46a23e;
+	margin-left: 12px;
 }
 .custom-dial .custom-modal-body {
-    padding: 32px 32px 20px 32px;
-    background-color: white;
-    width: 540px;
-    margin-top: 12px;
-    border-radius: 8px;
+	padding: 32px 32px 20px 32px;
+	background-color: white;
+	width: 540px;
+	margin-top: 12px;
+	border-radius: 8px;
 }
 .custom-dial .custom-modal-body-2 {
-    padding: 32px;
-    background-color: white;
-    width: 640px;
-    margin-top: 12px;
-    border-radius: 8px;
+	padding: 32px;
+	background-color: white;
+	width: 640px;
+	margin-top: 12px;
+	border-radius: 8px;
 }
 .custom-dial .select-docs-text {
-    color: #2F2F2F;
-    font-size: 13px;
-    font-family: OpenSans-Regular;
+	color: #2f2f2f;
+	font-size: 13px;
+	font-family: OpenSans-Regular;
 }
 .custom-dial .checkbox-style {
-    font-size: 13px;
-    font-family: OpenSans-Regular;
-    color: #2F2F2F;
-    margin-top: 19px;
+	font-size: 13px;
+	font-family: OpenSans-Regular;
+	color: #2f2f2f;
+	margin-top: 19px;
 }
 
 .custom-dial .documents-col {
-    padding-left: 0%;
+	padding-left: 0%;
 }
 .custom-dial .confirm-btn-modal {
-    background-color: #46A23E;
-    color: white;
-    width: 112px;
-    height: 40px;
-    font-family: OpenSans-SemiBold;
-    margin-left: 8px;
-    font-size: 13px;
-    margin-top: 20px;
+	background-color: #46a23e;
+	color: white;
+	width: 112px;
+	height: 40px;
+	font-family: OpenSans-SemiBold;
+	margin-left: 8px;
+	font-size: 13px;
+	margin-top: 20px;
 }
 
 .custom-dial .confirm-btn-modal:hover {
-    background-color: #46A23E;
+	background-color: #46a23e;
 }
 
 .custom-dial .cancel-btn-modal {
-    background-color: #D8D8D8;
-    color: #717171;
-    width: 112px;
-    height: 40px;
-    font-size: 13px;
-    font-family: OpenSans-SemiBold;
-    margin-left: 8px;
-    margin-top: 20px;
+	background-color: #d8d8d8;
+	color: #717171;
+	width: 112px;
+	height: 40px;
+	font-size: 13px;
+	font-family: OpenSans-SemiBold;
+	margin-left: 8px;
+	margin-top: 20px;
 }
 .custom-dial .cancel-btn-modal:hover {
-    background-color: #D8D8D8;
+	background-color: #d8d8d8;
 }
 .custom-dial .ant-modal-close {
-    visibility: hidden;
+	visibility: hidden;
 }
 .custom-dial .searchbar-div {
-    margin-top: 16px;
+	margin-top: 16px;
 }
 .custom-dial .modal-searchbar {
-    margin-right: 30px;
-    width: 320px;
-} */
-.farmers-table .permission-field-1 {
+	margin-right: 30px;
+	width: 320px;
+}
+.custom-dial .farmers-table .permission-field-1 {
 	color: #2f2f2f;
 	font-size: 13px;
 	margin-left: 23px;
 	font-family: OpenSans-Regular;
 }
-.farmers-table .permission-field-2 {
+.custom-dial .farmers-table .permission-field-2 {
 	color: #ababab;
 	font-size: 11px;
 	margin-left: 23px;
 	font-family: OpenSans-Regular;
 }
-.farmers-table .delete-btn {
+.custom-dial .farmers-table .delete-btn {
 	cursor: pointer;
+}
+
+.custom-dial .farmers-table-2 {
+	overflow: hidden;
 }

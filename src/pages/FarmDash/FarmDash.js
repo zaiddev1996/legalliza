@@ -1,85 +1,29 @@
-import { React } from 'react';
+import { React, useState, useEffect } from 'react';
 import './FarmDash.css';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import SolidPrimaryButton from '../../components/Buttons/SolidPrimaryButton';
-import { Table } from 'antd';
+import { message, Table } from 'antd';
 import History from '../../@history';
+import { useFarmManagement } from '../../hooks/farms/useFarmManagement';
+import { Loader } from '../../components/loader/loader';
 
 export function FarmDash() {
-	const dataSource = [
-		{
-			key: '1',
-			farm: 'Fazenda São Miguel',
-			location: 'Jaraguá do Sul/GO',
-			longitude: '15º52’57.10’’S | 49º40’3.85’’O',
-			properties: '4',
-			users: '3',
-			legal: '30%'
-		},
-		{
-			key: '2',
-			farm: 'Fazenda São Miguel',
-			location: 'Jaraguá do Sul/GO',
-			longitude: '15º52’57.10’’S | 49º40’3.85’’O',
-			properties: '4',
-			users: '3',
-			legal: '30%'
-		},
-		{
-			key: '3',
-			farm: 'Fazenda São Miguel',
-			location: 'Jaraguá do Sul/GO',
-			longitude: '15º52’57.10’’S | 49º40’3.85’’O',
-			properties: '4',
-			users: '3',
-			legal: '30%'
-		},
-		{
-			key: '4',
-			farm: 'Fazenda São Miguel',
-			location: 'Jaraguá do Sul/GO',
-			longitude: '15º52’57.10’’S | 49º40’3.85’’O',
-			properties: '4',
-			users: '3',
-			legal: '30%'
-		},
-		{
-			key: '5',
-			farm: 'Fazenda São Miguel',
-			location: 'Jaraguá do Sul/GO',
-			longitude: '15º52’57.10’’S | 49º40’3.85’’O',
-			properties: '4',
-			users: '3',
-			legal: '30%'
-		},
-		{
-			key: '6',
-			farm: 'Fazenda São Miguel',
-			location: 'Jaraguá do Sul/GO',
-			longitude: '15º52’57.10’’S | 49º40’3.85’’O',
-			properties: '4',
-			users: '3',
-			legal: '30%'
-		},
-		{
-			key: '7',
-			farm: 'Fazenda São Miguel',
-			location: 'Jaraguá do Sul/GO',
-			longitude: '15º52’57.10’’S | 49º40’3.85’’O',
-			properties: '4',
-			users: '3',
-			legal: '30%'
-		},
-		{
-			key: '8',
-			farm: 'Fazenda São Miguel',
-			location: 'Jaraguá do Sul/GO',
-			longitude: '15º52’57.10’’S | 49º40’3.85’’O',
-			properties: '4',
-			users: '3',
-			legal: '30%'
-		}
-	];
+	const { getAllFarms } = useFarmManagement();
+	const [ farms, setFarms ] = useState([]);
+	const [ loading, setLoading ] = useState(false);
+
+	useEffect(() => {
+		setLoading(true);
+		getAllFarms()
+			.then((farmList) => {
+				setLoading(false);
+				setFarms(farmList);
+			})
+			.catch((error) => {
+				setLoading(false);
+				message.error(error);
+			});
+	}, []);
 
 	const columns = [
 		{
@@ -116,15 +60,31 @@ export function FarmDash() {
 	return (
 		<div className="farm-main">
 			<div className="d-flex justify-content-between">
-				<SearchBar />
+				<SearchBar onChange={() => {}} />
 				<SolidPrimaryButton
 					text={'+ Nova Fazenda'}
 					onClick={() => {
-						History.push({ pathname: '/farm-details' });
+						History.push({ pathname: '/farm-details', state: 'create' });
 					}}
 				/>
 			</div>
-			<Table dataSource={dataSource} columns={columns} className="farms-table" />;
+			<Table
+				onRow={(record, rowIndex) => {
+					return {
+						onClick: (event) => {
+							History.push({ pathname: `/farm-details/${record.key}` });
+						}, // click row
+						onDoubleClick: (event) => {}, // double click row
+						onContextMenu: (event) => {}, // right button click row
+						onMouseEnter: (event) => {}, // mouse enter row
+						onMouseLeave: (event) => {} // mouse leave row
+					};
+				}}
+				dataSource={farms}
+				columns={columns}
+				className="farms-table"
+			/>
+			<Loader visible={loading} />
 		</div>
 	);
 }

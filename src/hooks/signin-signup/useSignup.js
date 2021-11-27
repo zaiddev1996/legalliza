@@ -1,5 +1,5 @@
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getFirestore, setDoc, doc } from 'firebase/firestore';
+import { getFirestore, setDoc, doc, Timestamp } from 'firebase/firestore';
 
 export function useSignup() {
 	const auth = getAuth();
@@ -14,7 +14,8 @@ export function useSignup() {
 						email: email,
 						uid: userCredential.user.uid,
 						name: name,
-						type: type
+						type: type,
+						createdAt: Timestamp.fromDate(new Date())
 					};
 					setDoc(doc(db, 'users', userCredential.user.uid), data)
 						.then(() => {

@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 export function useSignin() {
@@ -40,6 +40,18 @@ export function useSignin() {
 					}
 				});
 		});
+	const signout = () =>
+		new Promise(function(resolve, reject) {
+			signOut(auth)
+				.then(() => {
+					resolve();
+					// Sign-out successful.
+				})
+				.catch((error) => {
+					reject();
+					// An error happened.
+				});
+		});
 
-	return { signin };
+	return { signin, signout };
 }

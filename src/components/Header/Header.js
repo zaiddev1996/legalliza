@@ -1,14 +1,18 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import './Header.css';
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 import { ReactComponent as FarmTabLogo } from '../../assets/images/Union-tab.svg';
 import { ReactComponent as UserTabLogo } from '../../assets/images/user-tab.svg';
-import { Tabs } from 'antd';
+import { message, Tabs } from 'antd';
 import 'antd/dist/antd.css';
 import history from '../../@history';
+import { Loader } from '../loader/loader';
+import { useSignin } from '../../hooks/signin-signup/useSignin';
 
 export function Header() {
 	const { TabPane } = Tabs;
+	const [ loading, setLoading ] = useState(false);
+	const { signout } = useSignin();
 
 	function callback(key) {
 		switch (key) {
@@ -72,13 +76,21 @@ export function Header() {
 			<span
 				className="logout-text"
 				onClick={() => {
-					history.push({
-						pathname: '/'
-					});
+					setLoading(true);
+					signout()
+						.then(() => {
+							setLoading(false);
+							History.push({ pathname: '/signin' });
+						})
+						.catch(() => {
+							setLoading(false);
+							message.error('Error');
+						});
 				}}
 			>
 				SAIR
 			</span>
+			<Loader visible={loading} />
 		</div>
 	);
 }
