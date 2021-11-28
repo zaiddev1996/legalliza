@@ -77,6 +77,7 @@ export function DocumentSection({ name, farmId, propertyId }) {
 							if (i == list.length - 1) {
 								setOwnersList(list);
 								console.log(ownersList);
+								setLoading(false);
 							}
 						})
 						.catch(() => {
@@ -84,6 +85,7 @@ export function DocumentSection({ name, farmId, propertyId }) {
 							message.error('Some error happened');
 						});
 				}
+				setLoading(false);
 			})
 			.catch(() => {
 				setLoading(false);
