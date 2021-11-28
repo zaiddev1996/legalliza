@@ -31,5 +31,31 @@ export function useSignup() {
 				});
 		});
 
-	return { signup };
+	const ownerSignup = (name, email, password, type) =>
+		new Promise((resolve, reject) => {
+			console.log(`${email} ${password}`);
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					const data = {
+						email: email,
+						uid: userCredential.user.uid,
+						name: name,
+						type: type,
+						createdAt: Timestamp.fromDate(new Date())
+					};
+					setDoc(doc(db, 'users', userCredential.user.uid), data)
+						.then(() => {
+							resolve(userCredential.user.uid);
+						})
+						.catch((error) => {
+							reject('Error adding document: ', error);
+						});
+				})
+				.catch((error) => {
+					const errorCode = error.code;
+					reject(errorCode);
+				});
+		});
+
+	return { signup, ownerSignup };
 }

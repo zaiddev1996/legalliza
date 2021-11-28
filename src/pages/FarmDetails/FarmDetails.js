@@ -5,15 +5,15 @@ import ButtonWithIcon from '../../components/Buttons/ButtonWithIcon';
 import { Select } from 'antd';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import SolidPrimaryButton from '../../components/Buttons/SolidPrimaryButton';
-import { Table, message, Modal, Spin } from 'antd';
+import { Table, message, Input, Button, Space } from 'antd';
 import History from '../../@history';
 import { useFarmManagement } from '../../hooks/farms/useFarmManagement';
 import { useFarmDetails } from '../../hooks/farms/useFarmDetails';
 import { useDetailsValidation } from '../../hooks/farms/useDetailsVaildation';
-import { doc } from '@firebase/firestore';
-import { CaretRightFilled } from '@ant-design/icons';
 import { Loader } from '../../components/loader/loader';
 import { usePropertyManagement } from '../../hooks/properties/usePropertyManagement';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 
 export function FarmDetails(props) {
 	const { addNewFarm, getFarm, updateFarm, deleteFarm } = useFarmManagement();
@@ -25,32 +25,113 @@ export function FarmDetails(props) {
 	const [ farmId, setFarmId ] = useState();
 	const [ properties, setProperties ] = useState([]);
 	const { Option } = Select;
+	const [ searchText, setSearchText ] = useState('');
+	const [ searchedColumn, setSearchColumn ] = useState('');
+
+	const getColumnSearchProps = (dataIndex) => ({
+		filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+			<div style={{ padding: 8 }}>
+				<Input
+					// ref={(node) => {
+					// 	this.searchInput = node;
+					// }}
+					placeholder={`Search ${dataIndex}`}
+					value={selectedKeys[0]}
+					onChange={(e) => setSelectedKeys(e.target.value ? [ e.target.value ] : [])}
+					onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+					style={{ marginBottom: 8, display: 'block' }}
+				/>
+				<Space>
+					<Button
+						type="primary"
+						onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+						icon={<SearchOutlined />}
+						size="small"
+						style={{ width: 90 }}
+					>
+						Search
+					</Button>
+					<Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+						Reset
+					</Button>
+					{/* <Button
+						type="link"
+						size="small"
+						onClick={() => {
+							confirm({ closeDropdown: false });
+							set
+							this.setState({
+								searchText: selectedKeys[0],
+								searchedColumn: dataIndex
+							});
+						}}
+					>
+						Filter
+					</Button> */}
+				</Space>
+			</div>
+		),
+		filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+		onFilter: (value, record) =>
+			record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : '',
+		// onFilterDropdownVisibleChange: (visible) => {
+		// 	if (visible) {
+		// 		setTimeout(() => this.searchInput.select(), 100);
+		// 	}
+		// },
+		render: (text) =>
+			searchedColumn === dataIndex ? (
+				<Highlighter
+					highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+					searchWords={[ searchText ]}
+					autoEscape
+					textToHighlight={text ? text.toString() : ''}
+				/>
+			) : (
+				text
+			)
+	});
+
+	const handleSearch = (selectedKeys, confirm, dataIndex) => {
+		confirm();
+		setSearchText(selectedKeys[0]);
+		setSearchColumn(dataIndex);
+	};
+	const handleReset = (clearFilters) => {
+		clearFilters();
+		setSearchText('');
+	};
 
 	const columns = [
 		{
 			title: 'Imóvel',
 			dataIndex: 'property',
-			key: 'property'
+			key: 'property',
+			...getColumnSearchProps('property')
 		},
 		{
 			title: 'Localização',
 			dataIndex: 'location',
-			key: 'location'
+			key: 'location',
+			...getColumnSearchProps('location')
 		},
 		{
 			title: 'Latitude | Longitude',
 			dataIndex: 'longitude',
-			key: 'longitude'
+			key: 'longitude',
+			...getColumnSearchProps('longitude')
 		},
 		{
 			title: 'Usuários',
 			dataIndex: 'users',
-			key: 'users'
+			key: 'users',
+			...getColumnSearchProps('users')
 		},
 		{
 			title: 'Documentos',
 			dataIndex: 'documents',
-			key: 'documents'
+			key: 'documents',
+			...getColumnSearchProps('documents')
 		}
 	];
 
@@ -312,8 +393,8 @@ export function FarmDetails(props) {
 				<div />
 			) : (
 				<div>
-					<div className="d-flex justify-content-between search-bar-div">
-						<SearchBar />
+					<div className="d-flex justify-content-end search-bar-div">
+						{/* <SearchBar /> */}
 						<SolidPrimaryButton
 							text={'+ Novo Imóvel'}
 							onClick={() => {

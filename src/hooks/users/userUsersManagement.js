@@ -20,7 +20,6 @@ import { usePropertyManagement } from '../properties/usePropertyManagement';
 export function useUsersManagement() {
 	const auth = getAuth();
 	const db = getFirestore();
-	const { changeDocumentCount } = usePropertyManagement();
 
 	const getAllUsers = () =>
 		new Promise((resolve, reject) => {

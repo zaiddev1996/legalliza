@@ -3,46 +3,25 @@ import './UserDash.css';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import SolidPrimaryButton from '../../components/Buttons/SolidPrimaryButton';
 import History from '../../@history';
-import { Table, Popconfirm } from 'antd';
+import { Table, Popconfirm, Input, Button, Space } from 'antd';
 import { CheckBox } from '../../components/CheckBox/CheckBox';
 import { ReactComponent as DeleteBtn } from '../../assets/images/delete-icon-white.svg';
 import { useState } from 'react';
-import { Modal } from 'antd';
-import { ReactComponent as FileIcon } from '../../assets/images/file-icon.svg';
-import { ReactComponent as FarmIcon } from '../../assets/images/farm-icon.svg';
 import { useUsersManagement } from '../../hooks/users/userUsersManagement';
 import { Loader } from '../../components/loader/loader';
 import { GrantPropertyAccessModal } from '../../components/GrantPropertyAccessModal/GrantPropertyAccessModal';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 
-const dataSource = [
-	{
-		key: '1',
-		name: 'Fazenda São Miguel',
-		cpf: '082.159.119-35'
-	},
-	{
-		key: '2',
-		name: 'Fazenda São Miguel',
-		cpf: '082.159.119-35'
-	},
-	{
-		key: '3',
-		name: 'Fazenda São Miguel',
-		cpf: '082.159.119-35'
-	},
-	{
-		key: '4',
-		name: 'Fazenda São Miguel',
-		cpf: '082.159.119-35'
-	}
-];
 export function UserDash() {
 	const [ isSecondModalVisible, setIsSecondModalVisible ] = useState(false);
-	const [ userRows, setUserRows ] = useState(dataSource);
+
 	const { getAllUsers } = useUsersManagement();
 	const [ usersList, setUsersList ] = useState([]);
 	const [ loading, setLoading ] = useState(false);
 	const [ selectedUserId, setSelectedUserId ] = useState();
+	const [ searchText, setSearchText ] = useState('');
+	const [ searchedColumn, setSearchColumn ] = useState('');
 
 	useEffect(() => {
 		setLoading(true);
@@ -57,16 +36,92 @@ export function UserDash() {
 			});
 	}, []);
 
+	const getColumnSearchProps = (dataIndex) => ({
+		filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+			<div style={{ padding: 8 }}>
+				<Input
+					// ref={(node) => {
+					// 	this.searchInput = node;
+					// }}
+					placeholder={`Search ${dataIndex}`}
+					value={selectedKeys[0]}
+					onChange={(e) => setSelectedKeys(e.target.value ? [ e.target.value ] : [])}
+					onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+					style={{ marginBottom: 8, display: 'block' }}
+				/>
+				<Space>
+					<Button
+						type="primary"
+						onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+						icon={<SearchOutlined />}
+						size="small"
+						style={{ width: 90 }}
+					>
+						Search
+					</Button>
+					<Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+						Reset
+					</Button>
+					{/* <Button
+						type="link"
+						size="small"
+						onClick={() => {
+							confirm({ closeDropdown: false });
+							set
+							this.setState({
+								searchText: selectedKeys[0],
+								searchedColumn: dataIndex
+							});
+						}}
+					>
+						Filter
+					</Button> */}
+				</Space>
+			</div>
+		),
+		filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+		onFilter: (value, record) =>
+			record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : '',
+		// onFilterDropdownVisibleChange: (visible) => {
+		// 	if (visible) {
+		// 		setTimeout(() => this.searchInput.select(), 100);
+		// 	}
+		// },
+		render: (text) =>
+			searchedColumn === dataIndex ? (
+				<Highlighter
+					highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+					searchWords={[ searchText ]}
+					autoEscape
+					textToHighlight={text ? text.toString() : ''}
+				/>
+			) : (
+				text
+			)
+	});
+
+	const handleSearch = (selectedKeys, confirm, dataIndex) => {
+		confirm();
+		setSearchText(selectedKeys[0]);
+		setSearchColumn(dataIndex);
+	};
+	const handleReset = (clearFilters) => {
+		clearFilters();
+		setSearchText('');
+	};
+
 	const columns = [
 		{
 			title: 'Nome',
 			dataIndex: 'name',
-			key: 'name'
+			key: 'name',
+			...getColumnSearchProps('name')
 		},
 		{
 			title: 'CPF/CNPJ',
 			dataIndex: 'cpf',
-			key: 'cpf'
+			key: 'cpf',
+			...getColumnSearchProps('cpf')
 		},
 		{
 			title: 'Gestão Usuários',
@@ -132,14 +187,14 @@ export function UserDash() {
 	];
 
 	const handleDelete = (key) => {
-		const data = userRows.filter((item) => item.key !== key);
-		console.log(data);
-		setUserRows(data);
+		// const data = userRows.filter((item) => item.key !== key);
+		// console.log(data);
+		// setUserRows(data);
 	};
 	return (
 		<div className="farmer-dashboard">
-			<div className="d-flex justify-content-between">
-				<SearchBar />
+			<div className="d-flex justify-content-end">
+				{/* <SearchBar /> */}
 				<SolidPrimaryButton
 					text={'+ Novo Usuário'}
 					onClick={() => {

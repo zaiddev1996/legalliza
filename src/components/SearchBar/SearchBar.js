@@ -8,7 +8,10 @@ export function SearchBar({ className, onChange }) {
 			<input
 				placeholder="Pesquisar Fazendas..."
 				className="input-search"
+				type={'text'}
+				// value={'asd'}
 				onChange={(e) => {
+					// onChange();
 					onChange(e.target.value);
 				}}
 			/>
