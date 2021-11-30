@@ -44,6 +44,29 @@ export function useUsersManagement() {
 				});
 		});
 
+	const getMultipleUsers = (userIds) =>
+		new Promise((resolve, reject) => {
+			const q = query(collection(db, 'users'), where('uid', 'in', userIds), orderBy('createdAt', 'desc'));
+			getDocs(q)
+				.then((querySnapshot) => {
+					let documentList = [];
+					querySnapshot.forEach((doc) => {
+						const documentData = doc.data();
+						const data = {
+							...documentData,
+							key: doc.id
+						};
+						documentList.push(data);
+					});
+					console.log(documentList);
+					resolve(documentList);
+				})
+				.catch((error) => {
+					reject(error);
+					console.log(error);
+				});
+		});
+
 	const getUserData = (userId) =>
 		new Promise((resolve, reject) => {
 			// console.log(farmId);
@@ -281,6 +304,7 @@ export function useUsersManagement() {
 	return {
 		getAllUsers,
 		getUserData,
-		updateUserInfo
+		updateUserInfo,
+		getMultipleUsers
 	};
 }

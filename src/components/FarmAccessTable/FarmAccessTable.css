@@ -1,0 +1,26 @@
+.farm-access-table
+	.ant-table-thead
+	> tr
+	> th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+	background-color: transparent;
+}
+
+.farm-access-table .ant-table-thead > tr > th {
+	background-color: transparent;
+	font-size: 13px;
+	font-family: OpenSans-SemiBold;
+	color: #2f2f2f;
+	line-height: 17.7px;
+}
+
+.farm-access-table .ant-table-tbody > tr > td {
+	font-family: OpenSans-Regular;
+	color: #2f2f2f;
+	font-size: 13px;
+	line-height: 20.7px;
+}
+
+.farm-access-table .create-button {
+	background-color: #98c21f !important;
+	height: 42px;
+}

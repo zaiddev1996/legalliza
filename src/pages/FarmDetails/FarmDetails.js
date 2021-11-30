@@ -14,9 +14,12 @@ import { Loader } from '../../components/loader/loader';
 import { usePropertyManagement } from '../../hooks/properties/usePropertyManagement';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+import { FarmAccessTable } from '../../components/FarmAccessTable/FarmAccessTable';
+import { useUsersManagement } from '../../hooks/users/userUsersManagement';
 
 export function FarmDetails(props) {
 	const { addNewFarm, getFarm, updateFarm, deleteFarm } = useFarmManagement();
+	const { getMultipleUsers } = useUsersManagement();
 	const { getAllProperties } = usePropertyManagement();
 	const { farmSingularDetails } = useFarmDetails();
 	const { validateDetails } = useDetailsValidation();
@@ -139,15 +142,7 @@ export function FarmDetails(props) {
 		if (props.match.params.id != undefined) {
 			setLoading(true);
 			setFarmId(props.match.params.id);
-			getFarm(props.match.params.id)
-				.then((data) => {
-					setLoading(false);
-					setSingularDetailsState(data);
-				})
-				.catch((error) => {
-					setLoading(false);
-					message.error(error);
-				});
+			getFarmDetails();
 
 			getAllProperties(props.match.params.id)
 				.then((propertyList) => {
@@ -160,6 +155,20 @@ export function FarmDetails(props) {
 				});
 		}
 	}, []);
+
+	const getFarmDetails = () => {
+		getFarm(props.match.params.id)
+			.then((data) => {
+				setLoading(false);
+				setSingularDetailsState(data);
+
+				console.log(data);
+			})
+			.catch((error) => {
+				setLoading(false);
+				message.error(error);
+			});
+	};
 
 	const onCreateFarm = () => {
 		setLoading(true);
@@ -419,6 +428,13 @@ export function FarmDetails(props) {
 						dataSource={properties}
 						columns={columns}
 						className="property-table"
+					/>
+					<FarmAccessTable
+						id={farmId}
+						data={singularDetailsState}
+						reloadFarm={() => {
+							getFarmDetails();
+						}}
 					/>
 				</div>
 			)}
