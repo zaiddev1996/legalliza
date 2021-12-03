@@ -5,7 +5,7 @@ import ButtonWithIcon from '../../components/Buttons/ButtonWithIcon';
 import { Select } from 'antd';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import SolidPrimaryButton from '../../components/Buttons/SolidPrimaryButton';
-import { Table, message, Input, Button, Space } from 'antd';
+import { Table, message, Input, Button, Space, Divider } from 'antd';
 import History from '../../@history';
 import { useFarmManagement } from '../../hooks/farms/useFarmManagement';
 import { useFarmDetails } from '../../hooks/farms/useFarmDetails';
@@ -16,10 +16,11 @@ import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import { FarmAccessTable } from '../../components/FarmAccessTable/FarmAccessTable';
 import { useUsersManagement } from '../../hooks/users/userUsersManagement';
+import { PlusOutlined } from '@ant-design/icons';
+import { list } from '@firebase/storage';
 
 export function FarmDetails(props) {
-	const { addNewFarm, getFarm, updateFarm, deleteFarm } = useFarmManagement();
-	const { getMultipleUsers } = useUsersManagement();
+	const { addNewFarm, getFarm, updateFarm, deleteFarm, updateGroupArray, getGroupArray } = useFarmManagement();
 	const { getAllProperties } = usePropertyManagement();
 	const { farmSingularDetails } = useFarmDetails();
 	const { validateDetails } = useDetailsValidation();
@@ -30,6 +31,8 @@ export function FarmDetails(props) {
 	const { Option } = Select;
 	const [ searchText, setSearchText ] = useState('');
 	const [ searchedColumn, setSearchColumn ] = useState('');
+	const [ newGroup, setNewGroup ] = useState('');
+	const [ groupArray, setGroupArray ] = useState([]);
 
 	const getColumnSearchProps = (dataIndex) => ({
 		filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -125,12 +128,6 @@ export function FarmDetails(props) {
 			...getColumnSearchProps('longitude')
 		},
 		{
-			title: 'Usuários',
-			dataIndex: 'users',
-			key: 'users',
-			...getColumnSearchProps('users')
-		},
-		{
 			title: 'Documentos',
 			dataIndex: 'documents',
 			key: 'documents',
@@ -139,6 +136,7 @@ export function FarmDetails(props) {
 	];
 
 	useEffect(() => {
+		populateGroupList();
 		if (props.match.params.id != undefined) {
 			setLoading(true);
 			setFarmId(props.match.params.id);
@@ -155,6 +153,19 @@ export function FarmDetails(props) {
 				});
 		}
 	}, []);
+
+	const populateGroupList = () => {
+		setLoading(true);
+		getGroupArray()
+			.then((data) => {
+				setLoading(false);
+				setGroupArray(data.farmGroups);
+			})
+			.catch((error) => {
+				setLoading(false);
+				message.error(error);
+			});
+	};
 
 	const getFarmDetails = () => {
 		getFarm(props.match.params.id)
@@ -268,7 +279,7 @@ export function FarmDetails(props) {
 				<div className="d-flex flex-column detail-div-left-margin">
 					<span className="align-self-start detail-heading">Estado:</span>
 					<Select
-						defaultValue="SC"
+						value="SC"
 						className="select-options state"
 						onChange={(e) => {
 							singularDetailsState.state = e;
@@ -281,7 +292,7 @@ export function FarmDetails(props) {
 				<div className="d-flex flex-column detail-div-left-margin">
 					<span className="align-self-start detail-heading">Município:</span>
 					<Select
-						defaultValue="Jaraguá do Sul"
+						value="Jaraguá do Sul"
 						className="select-options county"
 						onChange={(e) => {
 							singularDetailsState.country = e;
@@ -294,14 +305,23 @@ export function FarmDetails(props) {
 				<div className="d-flex flex-column detail-div-left-margin">
 					<span className="align-self-start detail-heading">Fazenda Legal:</span>
 					<Select
-						defaultValue="30"
+						value={singularDetailsState.legalFarm}
 						className="select-options legal"
 						onChange={(e) => {
 							singularDetailsState.legalFarm = e;
 						}}
 					>
+						<Option value="0">0%</Option>
+						<Option value="10">10%</Option>
+						<Option value="20">20%</Option>
 						<Option value="30">30%</Option>
 						<Option value="40">40%</Option>
+						<Option value="50">50%</Option>
+						<Option value="60">60%</Option>
+						<Option value="70">70%</Option>
+						<Option value="80">80%</Option>
+						<Option value="90">90%</Option>
+						<Option value="100">100%</Option>
 					</Select>
 				</div>
 				<div className="d-flex flex-column detail-div-left-margin">
@@ -339,14 +359,19 @@ export function FarmDetails(props) {
 							}}
 						/>
 						<Select
-							defaultValue="S"
+							value={singularDetailsState.latDirection}
 							className="select-options latitude"
 							onChange={(e) => {
-								singularDetailsState.latDirection = e;
+								setSingularDetailsState({
+									...singularDetailsState,
+									latDirection: e
+								});
 							}}
 						>
+							<Option value="E">E</Option>
+							<Option value="W">W</Option>
 							<Option value="S">S</Option>
-							<Option value="D">D</Option>
+							<Option value="N">N</Option>
 						</Select>
 					</div>
 				</div>
@@ -385,16 +410,71 @@ export function FarmDetails(props) {
 							}}
 						/>
 						<Select
-							defaultValue="S"
+							value={singularDetailsState.longDirection}
 							className="select-options latitude"
 							onChange={(e) => {
-								singularDetailsState.longDirection = e;
+								setSingularDetailsState({
+									...singularDetailsState,
+									longDirection: e
+								});
 							}}
 						>
+							<Option value="E">E</Option>
+							<Option value="W">W</Option>
 							<Option value="S">S</Option>
-							<Option value="D">D</Option>
+							<Option value="N">N</Option>
 						</Select>
 					</div>
+				</div>
+				<div className="d-flex flex-column detail-div-left-margin">
+					<span className="align-self-start detail-heading">Grupo:</span>
+					<Select
+						value={singularDetailsState.group}
+						className="select-options legal"
+						onChange={(e) => {
+							singularDetailsState.group = e;
+						}}
+						dropdownRender={(menu) => (
+							<div>
+								{menu}
+								<Divider style={{ margin: '4px 0' }} />
+								<div
+									style={{
+										display: 'flex',
+										flexDirection: 'column',
+										padding: 8,
+										color: '#98C21F',
+										gap: '10px',
+										alignItems: 'center'
+									}}
+									onClick={() => {}}
+								>
+									<Input
+										placeholder={'grupo'}
+										value={newGroup}
+										onChange={(e) => {
+											setNewGroup(e.target.value);
+										}}
+									/>
+									<SolidPrimaryButton
+										text={'Adicionar'}
+										onClick={() => {
+											setLoading(true);
+											updateGroupArray(newGroup)
+												.then(() => {
+													setLoading(false);
+												})
+												.catch((error) => {
+													setLoading(false);
+												});
+										}}
+									/>
+								</div>
+							</div>
+						)}
+					>
+						{groupArray.map((group) => <Option value={group}>{group}</Option>)}
+					</Select>
 				</div>
 			</div>
 			<div className="line-seperator" />

@@ -11,15 +11,18 @@ import { useUsersManagement } from '../../hooks/users/userUsersManagement';
 import { useUserDetails } from '../../hooks/users/useUserDetails';
 import { Loader } from '../../components/loader/loader';
 import { useManageFiles } from '../../hooks/files/useManageFiles';
+import { OwnerSignupModal } from '../../components/OwnerSignupModal/OwnerSignupModal';
+import History from '../../@history';
 
 export function UserDetails(props) {
-	const { getUserData, updateUserInfo } = useUsersManagement();
+	const { getUserData, updateUserInfo, deleteUser } = useUsersManagement();
 	const [ userId, setUserId ] = useState();
 	const { userSingularDetails } = useUserDetails();
 	const [ userData, setUserData ] = useState(userSingularDetails);
 	const [ laoding, setLoading ] = useState(false);
 	const { uploadFile } = useManageFiles();
 	const [ allCheckbox, setAllCheckbox ] = useState(false);
+	const [ passwordModalVisibility, setPassChangeVisibility ] = useState(false);
 
 	useEffect(
 		() => {
@@ -110,6 +113,20 @@ export function UserDetails(props) {
 		}
 	};
 
+	const onDelete = () => {
+		setLoading(true);
+		deleteUser(userId)
+			.then(() => {
+				setLoading(true);
+				setLoading(false);
+				History.goBack();
+			})
+			.catch((error) => {
+				setLoading(true);
+				setLoading(false);
+			});
+	};
+
 	return (
 		<div className="user-details pb-5">
 			<div className="d-flex justify-content-between">
@@ -131,8 +148,20 @@ export function UserDetails(props) {
 						}}
 						btnStyle={'update-btn'}
 					/>
-					<SolidPrimaryButton text={'Trocar Senha'} onClick={() => {}} btnStyle={'change-pass-btn'} />
-					<ButtonWithIcon text={'Excluir Fazenda'} onClick={() => {}} btnStyle={'delete-button'} />
+					<SolidPrimaryButton
+						text={'Trocar Senha'}
+						onClick={() => {
+							setPassChangeVisibility(true);
+						}}
+						btnStyle={'change-pass-btn'}
+					/>
+					<ButtonWithIcon
+						text={'Excluir Fazenda'}
+						onClick={() => {
+							onDelete();
+						}}
+						btnStyle={'delete-button'}
+					/>
 				</div>
 			</div>
 			<div className="d-flex flex-wrap contact-info-div">
@@ -332,6 +361,18 @@ export function UserDetails(props) {
 					}}
 				/>
 			</div>
+			{passwordModalVisibility ? (
+				<OwnerSignupModal
+					visible={true}
+					changeVisibility={() => {
+						setPassChangeVisibility(false);
+					}}
+					userId={userId}
+				/>
+			) : (
+				<div />
+			)}
+
 			<Loader visible={laoding} />
 		</div>
 	);

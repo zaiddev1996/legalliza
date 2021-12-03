@@ -72,7 +72,6 @@ export function Header() {
 					/>
 				</Tabs>
 			</div>
-
 			<span
 				className="logout-text"
 				onClick={() => {
@@ -84,7 +83,7 @@ export function Header() {
 						})
 						.catch(() => {
 							setLoading(false);
-							message.error('Error');
+							// message.error('Error');
 						});
 				}}
 			>

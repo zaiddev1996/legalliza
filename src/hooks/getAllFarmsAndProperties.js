@@ -34,8 +34,10 @@ export function useFarmAndPropertyManagement() {
 							getUserData(userId)
 								.then((userData) => {
 									for (let i = 0; i < propertiesList.length; i++) {
-										if (userData.propertiesAccess.includes(propertiesList[i].key)) {
-											propertiesList[i] = { ...propertiesList[i], isChecked: true };
+										if (userData.propertiesAccess) {
+											if (userData.propertiesAccess.includes(propertiesList[i].key)) {
+												propertiesList[i] = { ...propertiesList[i], isChecked: true };
+											}
 										}
 									}
 									var allFarmsAndPropertiesList = [];

@@ -3,7 +3,7 @@ import './UserDash.css';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import SolidPrimaryButton from '../../components/Buttons/SolidPrimaryButton';
 import History from '../../@history';
-import { Table, Popconfirm, Input, Button, Space } from 'antd';
+import { Table, Popconfirm, Input, Button, Space, message } from 'antd';
 import { CheckBox } from '../../components/CheckBox/CheckBox';
 import { ReactComponent as DeleteBtn } from '../../assets/images/delete-icon-white.svg';
 import { useState } from 'react';
@@ -16,7 +16,7 @@ import { SearchOutlined } from '@ant-design/icons';
 export function UserDash() {
 	const [ isSecondModalVisible, setIsSecondModalVisible ] = useState(false);
 
-	const { getAllUsers } = useUsersManagement();
+	const { getAllUsers, deleteUser } = useUsersManagement();
 	const [ usersList, setUsersList ] = useState([]);
 	const [ loading, setLoading ] = useState(false);
 	const [ selectedUserId, setSelectedUserId ] = useState();
@@ -24,6 +24,10 @@ export function UserDash() {
 	const [ searchedColumn, setSearchColumn ] = useState('');
 
 	useEffect(() => {
+		getUsersList();
+	}, []);
+
+	const getUsersList = () => {
 		setLoading(true);
 		getAllUsers()
 			.then((list) => {
@@ -34,7 +38,7 @@ export function UserDash() {
 				setLoading(false);
 				console.log('Some error happened');
 			});
-	}, []);
+	};
 
 	const getColumnSearchProps = (dataIndex) => ({
 		filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -178,7 +182,16 @@ export function UserDash() {
 			dataIndex: 'action',
 			render: (_, record) => (
 				<div>
-					<Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+					<Popconfirm
+						title="Sure to delete?"
+						onClick={(e) => {
+							e.stopPropagation();
+						}}
+						onConfirm={(e) => {
+							e.stopPropagation();
+							handleDelete(record.key);
+						}}
+					>
 						<DeleteBtn className="delete-btn" fill="#D15757" />
 					</Popconfirm>
 				</div>
@@ -187,6 +200,16 @@ export function UserDash() {
 	];
 
 	const handleDelete = (key) => {
+		setLoading(true);
+		deleteUser(key)
+			.then(() => {
+				setLoading(false);
+				getUsersList();
+			})
+			.catch((error) => {
+				setLoading(false);
+				message.error('Some error happened');
+			});
 		// const data = userRows.filter((item) => item.key !== key);
 		// console.log(data);
 		// setUserRows(data);
@@ -211,7 +234,7 @@ export function UserDash() {
 				onRow={(record, rowIndex) => {
 					return {
 						onClick: (event) => {
-							History.push({ pathname: `/user-details/${record.key}` });
+							History.push({ pathname: `/user-details/${record.uid}` });
 						}, // click row
 						onDoubleClick: (event) => {}, // double click row
 						onContextMenu: (event) => {}, // right button click row

@@ -74,8 +74,7 @@ export function usePropertyManagement() {
 							property: propertyData.name,
 							location: propertyData.country,
 							longitude: `${propertyData.latDegree}º${propertyData.latMinutes}’${propertyData.latSeconds}’’${propertyData.latDirection} | ${propertyData.longDegree}º${propertyData.longMinutes}’${propertyData.longSeconds}’’${propertyData.longDirection}`,
-							users: '3',
-							documents: propertyData.documentCount,
+							documents: propertyData.documentCount ? propertyData.documentCount : 0,
 							farmId: propertyData.farmId
 						};
 						propertyList.push(data);

@@ -18,6 +18,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { OwnerSignupModal } from '../OwnerSignupModal/OwnerSignupModal';
 import { usePropertyManagement } from '../../hooks/properties/usePropertyManagement';
 import { useUsersManagement } from '../../hooks/users/userUsersManagement';
+import { AddOwnerModal } from '../AddOwnerModal/AddOwnerModal';
 
 export function DocumentSection({ name, farmId, propertyId }) {
 	const [ loading, setLoading ] = useState(false);
@@ -475,19 +476,27 @@ export function DocumentSection({ name, farmId, propertyId }) {
 				/>
 			</div>
 			<Table dataSource={documentDataList} columns={columns} className="farmers-table" />
-			<div className="line-seperator" />
-			<p className="documents-heading">Proprietários:</p>
-			<div className="d-flex justify-content-end">
-				{/* <SearchBar /> */}
-				<SolidPrimaryButton
-					text={'+ Novo Proprietário'}
-					onClick={() => {
-						setOwnerSignupVisibility(true);
-						// onNewDocument();
-					}}
-				/>
-			</div>
-			<Table dataSource={ownersList} columns={ownersTableColumns} className="farmers-table" />
+			{name == 'Matrícula' ? (
+				<div>
+					{' '}
+					<div className="line-seperator" />
+					<p className="documents-heading">Proprietários:</p>
+					<div className="d-flex justify-content-end">
+						{/* <SearchBar /> */}
+						<SolidPrimaryButton
+							text={'+ Novo Proprietário'}
+							onClick={() => {
+								setOwnerSignupVisibility(true);
+								// onNewDocument();
+							}}
+						/>
+					</div>
+					<Table dataSource={ownersList} columns={ownersTableColumns} className="farmers-table" />
+				</div>
+			) : (
+				<div />
+			)}
+
 			<div className="line-seperator" />
 			<p className="documents-heading">Documentos de {name}:</p>
 			<div className="d-flex justify-content-end">
@@ -530,7 +539,7 @@ export function DocumentSection({ name, farmId, propertyId }) {
 				<div />
 			)}
 			{ownerSignupVisibility ? (
-				<OwnerSignupModal
+				<AddOwnerModal
 					visible={ownerSignupVisibility}
 					farmId={farmId}
 					propertyId={propertyId}

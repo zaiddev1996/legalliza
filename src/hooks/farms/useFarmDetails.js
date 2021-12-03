@@ -3,7 +3,7 @@ export function useFarmDetails() {
 		name: 'Farm name',
 		state: ' SC',
 		country: 'Jaragua',
-		legalFarm: '30',
+		legalFarm: '0',
 		latDegree: '',
 		latMinutes: '',
 		latSeconds: '',
@@ -11,7 +11,8 @@ export function useFarmDetails() {
 		longDegree: '',
 		longMinutes: '',
 		longSeconds: '',
-		longDirection: 'S'
+		longDirection: 'S',
+		group: 'Boa Vista'
 	};
 	return { farmSingularDetails };
 }

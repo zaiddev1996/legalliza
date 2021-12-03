@@ -5,25 +5,20 @@ import { message } from 'antd';
 import History from '../../@history';
 import { useSignup } from '../../hooks/signin-signup/useSignup';
 import { usePropertyManagement } from '../../hooks/properties/usePropertyManagement';
+import { useUsersManagement } from '../../hooks/users/userUsersManagement';
 
-export function OwnerSignupModal({ visible, changeVisibility, propertyId }) {
+export function OwnerSignupModal({ visible, changeVisibility, userId }) {
 	const [ loading, setLoading ] = useState(false);
 	const { ownerSignup } = useSignup();
-	const { addNewOwner } = usePropertyManagement();
+	const { changePassword } = useUsersManagement();
 
 	const onSignup = (e) => {
 		setLoading(true);
-		ownerSignup(e.name, e.email_address, e.password, 'User').then(
+		changePassword(userId, e.password).then(
 			function(rsp) {
-				addNewOwner(propertyId, { userId: rsp, percentage: e.percentage })
-					.then(() => {
-						message.success('Owner Added');
-						setLoading(false);
-						changeVisibility();
-					})
-					.catch(() => {
-						message.error('Some error happened');
-					});
+				message.success('Password changed');
+				setLoading(false);
+				changeVisibility();
 			},
 			function(error) {
 				setLoading(false);
@@ -65,10 +60,10 @@ export function OwnerSignupModal({ visible, changeVisibility, propertyId }) {
 						</div> */}
 						</div>
 						<div className="d-flex justify-content-center flex-column">
-							<p className="create-acc-heading">Create new owner account</p>
+							<p className="create-acc-heading">Change Password</p>
 							<Form onFinish={(e) => onSignup(e)} className="signup-form">
 								<div className="d-flex flex-column align-items-center inputs-div">
-									<Form.Item
+									{/* <Form.Item
 										name="name"
 										rules={[
 											{
@@ -104,7 +99,7 @@ export function OwnerSignupModal({ visible, changeVisibility, propertyId }) {
 										]}
 									>
 										<Input placeholder="Percentage" type={'number'} className="signup-inputs" />
-									</Form.Item>
+									</Form.Item> */}
 
 									<Form.Item
 										name="password"

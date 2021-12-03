@@ -14,7 +14,8 @@ import {
 	setDoc,
 	deleteDoc,
 	increment,
-	updateDoc
+	updateDoc,
+	arrayUnion
 } from 'firebase/firestore';
 import { usePropertyManagement } from '../properties/usePropertyManagement';
 
@@ -50,9 +51,9 @@ export function useFarmManagement() {
 							farm: farmData.name,
 							location: farmData.country,
 							longitude: `${farmData.latDegree}º${farmData.latMinutes}’${farmData.latSeconds}’’${farmData.latDirection} | ${farmData.longDegree}º${farmData.longMinutes}’${farmData.longSeconds}’’${farmData.longDirection}`,
-							properties: farmData.propertyCount,
-							users: '3',
-							legal: `${farmData.legalFarm}%`
+							properties: farmData.propertyCount ? farmData.propertyCount : 0,
+							legal: `${farmData.legalFarm}%`,
+							group: farmData.group
 						};
 						farmList.push(data);
 					});
@@ -93,10 +94,37 @@ export function useFarmManagement() {
 
 	const updateFarm = (farmId, data) =>
 		new Promise((resolve, reject) => {
-			console.log(farmId);
+			console.log(data);
 			setDoc(doc(db, 'farms', `${farmId + ''}`), data, { merge: true })
 				.then((doc) => {
 					resolve();
+				})
+				.catch((error) => {
+					reject(error);
+					console.log(error);
+				});
+		});
+
+	const updateGroupArray = (group) =>
+		new Promise((resolve, reject) => {
+			updateDoc(doc(db, 'lists', 'groups'), { farmGroups: arrayUnion(group) }, { merge: true })
+				.then((doc) => {
+					console.log();
+					resolve();
+				})
+				.catch((error) => {
+					reject(error);
+					console.log(error);
+				});
+		});
+
+	const getGroupArray = () =>
+		new Promise((resolve, reject) => {
+			// console.log(farmId);
+			getDoc(doc(db, 'lists', 'groups'))
+				.then((doc) => {
+					console.log(doc.data());
+					resolve(doc.data());
 				})
 				.catch((error) => {
 					reject(error);
@@ -118,5 +146,14 @@ export function useFarmManagement() {
 				});
 		});
 
-	return { addNewFarm, getAllFarms, getFarm, updateFarm, deleteFarm, changePropertyCount };
+	return {
+		addNewFarm,
+		getAllFarms,
+		getFarm,
+		updateFarm,
+		deleteFarm,
+		changePropertyCount,
+		updateGroupArray,
+		getGroupArray
+	};
 }

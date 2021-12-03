@@ -119,10 +119,10 @@ export function FarmDash() {
 			...getColumnSearchProps('properties')
 		},
 		{
-			title: 'Usuários',
-			dataIndex: 'users',
-			key: 'users',
-			...getColumnSearchProps('users')
+			title: 'Grupo',
+			dataIndex: 'group',
+			key: 'group',
+			...getColumnSearchProps('group')
 		},
 		{
 			title: 'Fazenda Legal',
