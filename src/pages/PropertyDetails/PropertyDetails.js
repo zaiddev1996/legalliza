@@ -165,7 +165,7 @@ export function PropertyDetails(props) {
 						<Option value="Jaraguá do Sull">Jaraguá do Sul</Option>
 					</Select>
 				</div>
-				<div className="d-flex flex-column detail-div-left-margin">
+				{/* <div className="d-flex flex-column detail-div-left-margin">
 					<span className="align-self-start detail-heading">Fazenda Legal:</span>
 					<Select
 						defaultValue="30"
@@ -177,7 +177,7 @@ export function PropertyDetails(props) {
 						<Option value="30">30%</Option>
 						<Option value="40">40%</Option>
 					</Select>
-				</div>
+				</div> */}
 				<div className="d-flex flex-column detail-div-left-margin">
 					<span className="align-self-start detail-heading">Latitude:</span>
 					<div className="d-flex">
