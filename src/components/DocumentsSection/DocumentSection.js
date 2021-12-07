@@ -467,7 +467,7 @@ export function DocumentSection({ name, farmId, propertyId }) {
 			<div className="line-seperator" />
 			<p className="documents-heading">{name}:</p>
 			<div className="d-flex justify-content-between">
-				<SearchBar />
+				{/* <SearchBar /> */}
 				<SolidPrimaryButton
 					text={`+ Nova ${name}`}
 					onClick={() => {
