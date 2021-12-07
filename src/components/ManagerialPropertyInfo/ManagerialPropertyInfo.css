@@ -1,0 +1,45 @@
+.managerial-info {
+	padding-bottom: 50px;
+}
+.managerial-info .documents-heading {
+	font-family: OpenSans-SemiBold;
+	font-size: 25px;
+	text-align: left;
+	margin-top: 30px;
+}
+
+.managerial-info .color-div {
+	width: 10px;
+	height: 10px;
+}
+
+.managerial-info .attachment-div {
+	width: 134px;
+	height: 107px;
+	background-color: #f6f6f6;
+	margin-top: 10px;
+	margin-right: 30px;
+	border-radius: 6px;
+}
+
+.managerial-info .attachment-text {
+	font-size: 12px;
+	font-weight: 400;
+	align-self: center;
+}
+
+.managerial-info .edit-icon-div {
+	position: absolute;
+	display: flex;
+	justify-content: end;
+	padding-top: 8px;
+	padding-right: 13px;
+	width: 134px;
+}
+
+.managerial-info .preview-image-div {
+	height: 368px;
+	background-color: #f6f6f6;
+	margin-top: 40px;
+	overflow: hidden;
+}

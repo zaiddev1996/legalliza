@@ -212,6 +212,50 @@ export function usePropertyManagement() {
 				});
 		});
 
+	const addNewRuralArea = (propertyId, areaDetails) =>
+		new Promise((resolve, reject) => {
+			addDoc(collection(db, 'properties', propertyId, 'ruralArea'), {
+				...areaDetails,
+				createdAt: Timestamp.fromDate(new Date())
+			})
+				.then((doc) => {
+					resolve(doc.id);
+					console.log(doc);
+				})
+				.catch((error) => {
+					reject(error);
+					console.log(error);
+				});
+		});
+
+	const getRuralAreas = (propertyId) =>
+		new Promise((resolve, reject) => {
+			const q = query(collection(db, 'properties', propertyId, 'ruralArea'), orderBy('createdAt', 'desc'));
+			getDocs(q)
+				.then((querySnapshot) => {
+					let propertyList = [];
+					querySnapshot.forEach((doc) => {
+						const propertyData = doc.data();
+						const data = {
+							key: doc.id,
+							area: propertyData.area,
+							value: propertyData.value,
+							percentage: propertyData.percentage,
+							type: propertyData.type,
+							comments: propertyData.comment,
+							color: propertyData.color
+						};
+						propertyList.push(data);
+					});
+					resolve(propertyList);
+					// console.log(farmList);
+				})
+				.catch((error) => {
+					reject(error);
+					console.log(error);
+				});
+		});
+
 	return {
 		addNewProperty,
 		getAllProperties,
@@ -222,6 +266,8 @@ export function usePropertyManagement() {
 		getAllFarmsProperties,
 		addNewOwner,
 		getPropertyOwners,
-		deleteOwner
+		deleteOwner,
+		addNewRuralArea,
+		getRuralAreas
 	};
 }

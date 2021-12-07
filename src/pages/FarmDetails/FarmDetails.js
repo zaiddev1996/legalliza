@@ -432,7 +432,10 @@ export function FarmDetails(props) {
 						value={singularDetailsState.group}
 						className="select-options legal"
 						onChange={(e) => {
-							singularDetailsState.group = e;
+							setSingularDetailsState({
+								...singularDetailsState,
+								group: e
+							});
 						}}
 						dropdownRender={(menu) => (
 							<div>

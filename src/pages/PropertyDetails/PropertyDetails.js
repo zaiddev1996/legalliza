@@ -12,6 +12,7 @@ import { usePropertyManagement } from '../../hooks/properties/usePropertyManagem
 import { usePropertyDetails } from '../../hooks/properties/usePropertyDetails';
 import { useDetailsValidation } from '../../hooks/properties/useDetailsVaildation';
 import { Loader } from '../../components/loader/loader';
+import { ManagerialPropertyInfo } from '../../components/ManagerialPropertyInfo/ManagerialPropertyInfo';
 
 export function PropertyDetails(props) {
 	const { Option } = Select;
@@ -23,6 +24,7 @@ export function PropertyDetails(props) {
 	const [ singularDetailsState, setSingularDetailsState ] = useState(propertySingularDetails);
 	const { addNewProperty, getProperty, deleteProperty, updateProperty } = usePropertyManagement();
 	const [ loading, setLoading ] = useState(false);
+	const [ selectedButton, setSelectedButton ] = useState(0);
 
 	const onCreateProperty = () => {
 		setLoading(true);
@@ -127,6 +129,22 @@ export function PropertyDetails(props) {
 								onUpdateProperty();
 							}}
 							btnStyle={'create-button'}
+						/>
+						<SolidPrimaryButton
+							text={'Documental'}
+							onClick={() => {
+								setSelectedButton(0);
+								// onUpdateProperty();
+							}}
+							btnStyle={selectedButton == 0 ? 'create-button' : 'unselected-button'}
+						/>
+						<SolidPrimaryButton
+							text={'Gerencial'}
+							onClick={() => {
+								setSelectedButton(1);
+								// onUpdateProperty();
+							}}
+							btnStyle={selectedButton == 1 ? 'create-button' : 'unselected-button'}
 						/>
 						<ButtonWithIcon
 							text={'Excluir Imóvel'}
@@ -275,80 +293,89 @@ export function PropertyDetails(props) {
 				<div />
 			) : (
 				<div>
-					<div className="line-seperator" />
-					<p className="documents-heading">Documentos:</p>
-					<div className="container documents-container">
-						<Radio.Group
-							defaultValue="Matrícula"
-							buttonStyle="solid"
-							className="row gx-3 gy-4"
-							onChange={(e) => {
-								setSelectedDocument(e.target.value);
-							}}
-						>
-							<div className="col-4">
-								<Radio.Button value="Matrícula" className="document">
-									Matrícula
-								</Radio.Button>
+					{selectedButton == 0 ? (
+						<div>
+							<div className="line-seperator" />
+							<p className="documents-heading">Documentos:</p>
+							<div className="container documents-container">
+								<Radio.Group
+									defaultValue="Matrícula"
+									buttonStyle="solid"
+									className="row gx-3 gy-4"
+									onChange={(e) => {
+										setSelectedDocument(e.target.value);
+									}}
+								>
+									<div className="col-4">
+										<Radio.Button value="Matrícula" className="document">
+											Matrícula
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="GEO" className="document">
+											GEO
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="CCIR" className="document">
+											CCIR
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="CAR" className="document">
+											CAR
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="LAR" className="document">
+											LAR
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="Outorga" className="document">
+											Outorga
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="ITR" className="document">
+											ITR
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="ADA" className="document">
+											ADA
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="Laudo" className="document">
+											Laudo
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="GSSMATR" className="document">
+											GSSMATR
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="LTCAT" className="document">
+											LTCAT
+										</Radio.Button>
+									</div>
+									<div className="col-4">
+										<Radio.Button value="Gerencial" className="document">
+											Gerencial
+										</Radio.Button>
+									</div>
+								</Radio.Group>
 							</div>
-							<div className="col-4">
-								<Radio.Button value="GEO" className="document">
-									GEO
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="CCIR" className="document">
-									CCIR
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="CAR" className="document">
-									CAR
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="LAR" className="document">
-									LAR
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="Outorga" className="document">
-									Outorga
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="ITR" className="document">
-									ITR
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="ADA" className="document">
-									ADA
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="Laudo" className="document">
-									Laudo
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="GSSMATR" className="document">
-									GSSMATR
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="LTCAT" className="document">
-									LTCAT
-								</Radio.Button>
-							</div>
-							<div className="col-4">
-								<Radio.Button value="Gerencial" className="document">
-									Gerencial
-								</Radio.Button>
-							</div>
-						</Radio.Group>
-					</div>
-					<DocumentSection name={selectedDocument} farmId={farmId} propertyId={propertyId} />
+							<DocumentSection name={selectedDocument} farmId={farmId} propertyId={propertyId} />
+						</div>
+					) : (
+						<div>
+							<div className="line-seperator" />
+							<ManagerialPropertyInfo propertyId={propertyId} />
+						</div>
+					)}
 				</div>
 			)}
 			<Loader visible={loading} />
