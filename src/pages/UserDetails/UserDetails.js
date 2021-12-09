@@ -39,38 +39,42 @@ export function UserDetails(props) {
 			if (props.match.params.userId != undefined) {
 				setUserId(props.match.params.userId);
 				setLoading(true);
-				getAccessibleProperties();
 				getAccessibleFarms();
 				getUserData(userId)
 					.then((data) => {
-						setLoading(false);
+						getAccessibleProperties(data.propertiesAccess);
 						var list = { ...userSingularDetails, ...data };
 						setUserData({ ...userSingularDetails, ...data });
 						// console.log(userData);
 					})
 					.catch((error) => {
+						console.log(error);
 						setLoading(false);
-						message.error('Some error happened');
+						// message.error('Some error happened');
 					});
 			}
 		},
 		[ userId ]
 	);
 
-	const getAccessibleProperties = () => {
+	const getAccessibleProperties = (accessArray) => {
 		getAllFarmsProperties('')
 			.then((propertiesList) => {
 				const list = [];
-				if (userData.propertiesAccess) {
+
+				if (accessArray) {
 					for (let i = 0; i < propertiesList.length; i++) {
-						if (userData.propertiesAccess.includes(propertiesList[i].key)) {
+						if (accessArray.includes(propertiesList[i].key)) {
 							list.push(propertiesList[i]);
 						}
 					}
 				}
+				console.log(list);
 				setProperties(list);
+				setLoading(false);
 			})
 			.catch((error) => {
+				setLoading(false);
 				console.log(error);
 				message.error('Some error happened');
 			});
