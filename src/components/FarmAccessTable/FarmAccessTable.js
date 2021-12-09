@@ -9,6 +9,7 @@ import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import { GrantFarmAccessModal } from '../GrantFarmAccessModal/GrantFarmAccessModal';
 import { useUsersManagement } from '../../hooks/users/userUsersManagement';
+import { useFarmManagement } from '../../hooks/farms/useFarmManagement';
 
 export function FarmAccessTable({ id, data, reloadFarm }) {
 	const [ loading, setLoading ] = useState(false);
@@ -19,6 +20,7 @@ export function FarmAccessTable({ id, data, reloadFarm }) {
 	const [ searchText, setSearchText ] = useState('');
 	const [ searchedColumn, setSearchColumn ] = useState('');
 	const { getMultipleUsers } = useUsersManagement();
+	const { updateFarm } = useFarmManagement();
 
 	const getColumnSearchProps = (dataIndex) => ({
 		filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -110,16 +112,25 @@ export function FarmAccessTable({ id, data, reloadFarm }) {
 						onConfirm={() => {
 							console.log(record.key);
 							setLoading(true);
-							// deleteDocumentData(farmId, propertyId, name, record.key)
-							// 	.then(() => {
-							// 		setLoading(false);
-							// 		const data = documentDataList.filter((item) => item.key !== record.key);
-							// 		setDocumentDataList(data);
-							// 	})
-							// 	.catch((error) => {
-							// 		setLoading(false);
-							// 		message.error(error);
-							// 	});
+							var farmIdsArray = [];
+							for (let i = 0; i < users.length; i++) {
+								if (users[i].uid != record.key) {
+									farmIdsArray.push(users[i].key);
+								}
+							}
+							// console.log(farmId);
+							updateFarm(id, { farmAccess: farmIdsArray })
+								.then(() => {
+									setLoading(false);
+									message.success('Farm access revoked for one user');
+									reloadFarm();
+								})
+								.catch((error) => {
+									setLoading(false);
+									console.log(error);
+									message.error('Some error happened');
+								});
+							console.log(farmIdsArray);
 						}}
 					>
 						<DeleteBtn className="delete-btn" fill="#D15757" />

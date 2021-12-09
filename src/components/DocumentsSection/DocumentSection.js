@@ -48,6 +48,7 @@ export function DocumentSection({ name, farmId, propertyId }) {
 	const [ ownerSignupVisibility, setOwnerSignupVisibility ] = useState(false);
 	const { getPropertyOwners, deleteOwner } = usePropertyManagement();
 	const { getUserData } = useUsersManagement();
+	const [ ownershipRemaining, setOwnershipRemaining ] = useState(100.0);
 
 	useEffect(
 		() => {
@@ -68,10 +69,14 @@ export function DocumentSection({ name, farmId, propertyId }) {
 	);
 	const populateOwnerTable = () => {
 		setLoading(true);
+		let ownersPercentage = 100.0;
 		getPropertyOwners(propertyId)
 			.then((list) => {
 				console.log(list);
 				for (let i = 0; i < list.length; i++) {
+					console.log(list[i].percentage);
+					ownersPercentage = ownersPercentage - parseFloat(list[i].percentage);
+					console.log(ownershipRemaining);
 					getUserData(list[i].owner)
 						.then((userData) => {
 							list[i] = { ...list[i], ...userData };
@@ -79,6 +84,7 @@ export function DocumentSection({ name, farmId, propertyId }) {
 								setOwnersList(list);
 								console.log(ownersList);
 								setLoading(false);
+								setOwnershipRemaining(ownersPercentage);
 							}
 						})
 						.catch(() => {
@@ -543,6 +549,7 @@ export function DocumentSection({ name, farmId, propertyId }) {
 					visible={ownerSignupVisibility}
 					farmId={farmId}
 					propertyId={propertyId}
+					remainingOwnership={ownershipRemaining}
 					changeVisibility={() => {
 						setOwnerSignupVisibility(false);
 						populateOwnerTable();

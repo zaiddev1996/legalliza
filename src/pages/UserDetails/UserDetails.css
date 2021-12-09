@@ -110,3 +110,12 @@
 .user-details .extra-top-margin {
 	margin-top: 40px;
 }
+
+.user-details .farms-table {
+	overflow: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+.user-details .farms-table::-webkit-scrollbar {
+	display: none;
+}

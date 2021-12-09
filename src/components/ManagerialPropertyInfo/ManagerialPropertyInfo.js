@@ -8,19 +8,40 @@ import { usePropertyManagement } from '../../hooks/properties/usePropertyManagem
 import { Loader } from '../loader/loader';
 import { useManageFiles } from '../../hooks/files/useManageFiles';
 
+let defaultData = [
+	{ color: '#FF0000', area: 'Estradas e Corredores', type: 'Consolidada', comments: 'test test test' },
+	{ color: '#808080', area: 'Benfeitorias', type: 'Consolidada' },
+	{ color: '#FFC000', area: 'Lavouras', type: 'Consolidada' },
+	{ color: '#F4B084', area: 'Pastagens', type: 'Consolidada' },
+	{ color: '#BF8F00', area: 'Reflorestamento', type: 'Consolidada' },
+	{ color: '#00B0F0', area: 'Espelhos D’água', type: 'Ambiental' },
+	{ color: '#92D050', area: 'AAP-Matas e Bordas', type: 'Ambiental' },
+	{ color: '#99FF33', area: 'Reserva Legal ( Mata )', type: 'Ambiental' }
+];
+
 export function ManagerialPropertyInfo({ propertyId }) {
 	const [ areaVisibility, setAreaVisibility ] = useState(false);
-	const [ ruralAreaList, setRuralAreaList ] = useState([]);
+	const [ ruralAreaList, setRuralAreaList ] = useState([
+		{ value: 0, percentage: 0, comments: '' },
+		{ value: 0, percentage: 0, comments: '' },
+		{ value: 0, percentage: 0, comments: '' },
+		{ value: 0, percentage: 0, comments: '' },
+		{ value: 0, percentage: 0, comments: '' },
+		{ value: 0, percentage: 0, comments: '' },
+		{ value: 0, percentage: 0, comments: '' },
+		{ value: 0, percentage: 0, comments: '' }
+	]);
 	const [ areaTypeTotalList, setAreaTypeTotalList ] = useState([]);
 	const [ loading, setLoading ] = useState(false);
-	const { getRuralAreas, updateProperty, getProperty } = usePropertyManagement();
+	const { updateProperty, updateRuralArea, getProperty } = usePropertyManagement();
 	const { uploadFile } = useManageFiles();
 	const [ propertyAttachments, setPropertyAttachments ] = useState({ solidImage: '', image: '', kmlFile: '' });
 	const [ previewPicture, setPreviewPicture ] = useState('');
+	const [ tableData, setTableData ] = useState([]);
 	useEffect(
 		() => {
 			getAttachments();
-			getAreasList();
+			// getAreasList();
 		},
 		[ propertyId ]
 	);
@@ -29,46 +50,54 @@ export function ManagerialPropertyInfo({ propertyId }) {
 		getProperty('', propertyId)
 			.then((doc) => {
 				if (doc.propertyAttachments) setPropertyAttachments(doc.propertyAttachments);
+				// ruralAreaList = doc.ruralAreas;
+				setRuralAreaList(doc.ruralAreas);
+				setTableData(defaultData);
+				calculateTotals(doc.ruralAreas);
 				console.log(propertyAttachments);
 			})
 			.catch((error) => {
-				message.error('Some error happened');
-			});
-	};
-
-	const getAreasList = () => {
-		setLoading(true);
-		getRuralAreas(propertyId)
-			.then((list) => {
-				setRuralAreaList(list);
-				calculateTotals(list);
-				setLoading(false);
-			})
-			.catch((error) => {
-				setLoading(false);
 				console.log(error);
 				message.error('Some error happened');
 			});
 	};
+
+	// const getAreasList = () => {
+	// 	setLoading(true);
+	// 	getRuralAreas(propertyId)
+	// 		.then((list) => {
+	// 			setRuralAreaList(list);
+	// 			calculateTotals(list);
+	// 			setLoading(false);
+	// 		})
+	// 		.catch((error) => {
+	// 			setLoading(false);
+	// 			console.log(error);
+	// 			message.error('Some error happened');
+	// 		});
+	// };
 	const calculateTotals = (list) => {
 		var data = [];
-		for (let i = 0; i < list.length; i++) {
-			const type = list[i].type;
-			const percentage = list[i].percentage;
-			const value = list[i].value;
-			var alreadyAdded = false;
-			for (let j = 0; j < data.length; j++) {
-				if (data[j].type == type) {
-					data[j].value = parseFloat(data[j].value) + parseFloat(value);
-					data[j].percentage = parseFloat(data[j].percentage) + parseFloat(percentage);
-					alreadyAdded = true;
-					break;
-				}
-			}
-			if (!alreadyAdded) {
-				data.push({ type: list[i].type, value: list[i].value, percentage: list[i].percentage });
-			}
-		}
+		data.push({
+			type: 'Consolidada',
+			value:
+				parseFloat(list[0].value) +
+				parseFloat(list[1].value) +
+				parseFloat(list[2].value) +
+				parseFloat(list[3].value) +
+				parseFloat(list[4].value),
+			percentage:
+				parseFloat(list[0].percentage) +
+				parseFloat(list[1].percentage) +
+				parseFloat(list[2].percentage) +
+				parseFloat(list[3].percentage) +
+				parseFloat(list[4].percentage)
+		});
+		data.push({
+			type: 'Ambiental',
+			value: list[5].value + list[6].value + list[7].value,
+			percentage: list[5].percentage + list[6].percentage + list[7].percentage
+		});
 		setAreaTypeTotalList(data);
 	};
 
@@ -201,13 +230,62 @@ export function ManagerialPropertyInfo({ propertyId }) {
 		{
 			title: 'Valor',
 			dataIndex: 'value',
-			key: 'value'
+			key: 'value',
+			render: (_, record, index) => (
+				<input
+					defaultValue={ruralAreaList[index].value}
+					className={'cell-input'}
+					onKeyPress={(e) => {
+						if (e.code == 'Enter') {
+							if (e.target.value >= 0) {
+								setLoading(true);
+								ruralAreaList[index] = { ...ruralAreaList[index], value: e.target.value };
+								updateRuralArea(propertyId, ruralAreaList)
+									.then(() => {
+										calculateTotals(ruralAreaList);
+										setLoading(false);
+									})
+									.catch((error) => {
+										message.error('Error in updating');
+									});
+								console.log(e.target.value);
+							}
+						}
+					}}
+				/>
+			)
 		},
 		{
 			title: 'Porcentagem',
 			dataIndex: 'percentage',
 			key: 'percentage',
-			render: (_, record) => <span>{record.percentage}%</span>
+			editable: true,
+			render: (_, record, index) => (
+				<input
+					defaultValue={`${ruralAreaList[index].percentage}%`}
+					className={'cell-input'}
+					onKeyPress={(e) => {
+						if (e.code == 'Enter') {
+							if (e.target.value.replace('%', '') >= 0) {
+								setLoading(true);
+								ruralAreaList[index] = {
+									...ruralAreaList[index],
+									percentage: e.target.value.replace('%', '')
+								};
+								updateRuralArea(propertyId, ruralAreaList)
+									.then(() => {
+										calculateTotals(ruralAreaList);
+										setLoading(false);
+									})
+									.catch((error) => {
+										message.error('Error in updating');
+									});
+								console.log(e.target.value);
+							}
+						}
+					}}
+				/>
+			)
 		},
 		{
 			title: 'Tipo',
@@ -217,9 +295,30 @@ export function ManagerialPropertyInfo({ propertyId }) {
 		{
 			title: 'Comentários',
 			dataIndex: 'comments',
-			key: 'comments'
+			key: 'comments',
+			render: (_, record, index) => (
+				<input
+					defaultValue={ruralAreaList[index].comments}
+					className={'cell-input'}
+					onKeyPress={(e) => {
+						if (e.code == 'Enter') {
+							setLoading(true);
+							ruralAreaList[index] = { ...ruralAreaList[index], comments: e.target.value };
+							updateRuralArea(propertyId, ruralAreaList)
+								.then(() => {
+									setLoading(false);
+								})
+								.catch((error) => {
+									message.error('Error in updating');
+								});
+							console.log(e.target.value);
+						}
+					}}
+				/>
+			)
 		}
 	];
+
 	const columns2 = [
 		{
 			title: '',
@@ -239,6 +338,7 @@ export function ManagerialPropertyInfo({ propertyId }) {
 			render: (_, record) => <span>{record.percentage}%</span>
 		}
 	];
+
 	return (
 		<div className={'managerial-info'}>
 			<div className={'d-flex justify-content-between align-items-center'}>
@@ -250,7 +350,7 @@ export function ManagerialPropertyInfo({ propertyId }) {
 					}}
 				/>
 			</div>
-			<Table dataSource={ruralAreaList} columns={columns} className="property-table" pagination={false} />
+			<Table dataSource={tableData} columns={columns} className="property-table" pagination={false} />
 			<p className="documents-heading">Totais</p>
 			<Table dataSource={areaTypeTotalList} columns={columns2} className="property-table" pagination={false} />
 			<p className="documents-heading">Anexos</p>
@@ -317,7 +417,7 @@ export function ManagerialPropertyInfo({ propertyId }) {
 				visible={areaVisibility}
 				changeVisibility={() => {
 					setAreaVisibility(false);
-					getAreasList();
+					// getAreasList();
 				}}
 				propertyId={propertyId}
 			/>

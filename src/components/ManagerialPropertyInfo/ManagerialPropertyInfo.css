@@ -11,6 +11,7 @@
 .managerial-info .color-div {
 	width: 10px;
 	height: 10px;
+	border-radius: 2px;
 }
 
 .managerial-info .attachment-div {
@@ -42,4 +43,18 @@
 	background-color: #f6f6f6;
 	margin-top: 40px;
 	overflow: hidden;
+}
+
+.managerial-info .cell-input {
+	border: none;
+}
+
+.managerial-info .property-table::-webkit-scrollbar {
+	display: none;
+}
+
+.managerial-info .property-table {
+	overflow: scroll;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }

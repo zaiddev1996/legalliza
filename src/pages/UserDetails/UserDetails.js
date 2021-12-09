@@ -3,7 +3,7 @@ import './UserDetails.css';
 import { ReactComponent as EditIcon } from '../../assets/images/edit-icon.svg';
 import ButtonWithIcon from '../../components/Buttons/ButtonWithIcon';
 import SolidPrimaryButton from '../../components/Buttons/SolidPrimaryButton';
-import { Upload, message } from 'antd';
+import { Upload, message, Space, Button, Input, Table } from 'antd';
 import { ReactComponent as UploadIcon } from '../../assets/images/upload.svg';
 import { CheckBox } from '../../components/CheckBox/CheckBox';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
@@ -13,22 +13,34 @@ import { Loader } from '../../components/loader/loader';
 import { useManageFiles } from '../../hooks/files/useManageFiles';
 import { OwnerSignupModal } from '../../components/OwnerSignupModal/OwnerSignupModal';
 import History from '../../@history';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
+import { useFarmManagement } from '../../hooks/farms/useFarmManagement';
+import { usePropertyManagement } from '../../hooks/properties/usePropertyManagement';
 
 export function UserDetails(props) {
 	const { getUserData, updateUserInfo, deleteUser } = useUsersManagement();
 	const [ userId, setUserId ] = useState();
+	const [ farms, setFarms ] = useState([]);
+	const [ properties, setProperties ] = useState([]);
 	const { userSingularDetails } = useUserDetails();
 	const [ userData, setUserData ] = useState(userSingularDetails);
 	const [ laoding, setLoading ] = useState(false);
 	const { uploadFile } = useManageFiles();
+	const { getMultipleFarms } = useFarmManagement();
+	const { getAllFarmsProperties } = usePropertyManagement();
 	const [ allCheckbox, setAllCheckbox ] = useState(false);
 	const [ passwordModalVisibility, setPassChangeVisibility ] = useState(false);
+	const [ searchText, setSearchText ] = useState('');
+	const [ searchedColumn, setSearchColumn ] = useState('');
 
 	useEffect(
 		() => {
 			if (props.match.params.userId != undefined) {
 				setUserId(props.match.params.userId);
 				setLoading(true);
+				getAccessibleProperties();
+				getAccessibleFarms();
 				getUserData(userId)
 					.then((data) => {
 						setLoading(false);
@@ -44,6 +56,36 @@ export function UserDetails(props) {
 		},
 		[ userId ]
 	);
+
+	const getAccessibleProperties = () => {
+		getAllFarmsProperties('')
+			.then((propertiesList) => {
+				const list = [];
+				if (userData.propertiesAccess) {
+					for (let i = 0; i < propertiesList.length; i++) {
+						if (userData.propertiesAccess.includes(propertiesList[i].key)) {
+							list.push(propertiesList[i]);
+						}
+					}
+				}
+				setProperties(list);
+			})
+			.catch((error) => {
+				console.log(error);
+				message.error('Some error happened');
+			});
+	};
+
+	const getAccessibleFarms = () => {
+		getMultipleFarms(props.match.params.userId)
+			.then((list) => {
+				setFarms(list);
+			})
+			.catch((error) => {
+				console.log(error);
+				message.error('Error happened');
+			});
+	};
 
 	const onUpdate = () => {
 		if (userData.name.length > 0) {
@@ -126,6 +168,145 @@ export function UserDetails(props) {
 				setLoading(false);
 			});
 	};
+
+	const getColumnSearchProps = (dataIndex) => ({
+		filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+			<div style={{ padding: 8 }}>
+				<Input
+					// ref={(node) => {
+					// 	this.searchInput = node;
+					// }}
+					placeholder={`Search ${dataIndex}`}
+					value={selectedKeys[0]}
+					onChange={(e) => setSelectedKeys(e.target.value ? [ e.target.value ] : [])}
+					onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+					style={{ marginBottom: 8, display: 'block' }}
+				/>
+				<Space>
+					<Button
+						type="primary"
+						onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+						icon={<SearchOutlined />}
+						size="small"
+						style={{ width: 90 }}
+					>
+						Search
+					</Button>
+					<Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+						Reset
+					</Button>
+					{/* <Button
+						type="link"
+						size="small"
+						onClick={() => {
+							confirm({ closeDropdown: false });
+							set
+							this.setState({
+								searchText: selectedKeys[0],
+								searchedColumn: dataIndex
+							});
+						}}
+					>
+						Filter
+					</Button> */}
+				</Space>
+			</div>
+		),
+		filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+		onFilter: (value, record) =>
+			record[dataIndex] ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()) : '',
+		// onFilterDropdownVisibleChange: (visible) => {
+		// 	if (visible) {
+		// 		setTimeout(() => this.searchInput.select(), 100);
+		// 	}
+		// },
+		render: (text) =>
+			searchedColumn === dataIndex ? (
+				<Highlighter
+					highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+					searchWords={[ searchText ]}
+					autoEscape
+					textToHighlight={text ? text.toString() : ''}
+				/>
+			) : (
+				text
+			)
+	});
+
+	const columns = [
+		{
+			title: 'Fazenda',
+			dataIndex: 'farm',
+			key: 'farm',
+			...getColumnSearchProps('farm')
+		},
+		{
+			title: 'Localização',
+			dataIndex: 'location',
+			key: 'location',
+			...getColumnSearchProps('location')
+		},
+		{
+			title: 'Latitude | Longitude',
+			dataIndex: 'longitude',
+			key: 'longitude',
+			...getColumnSearchProps('longitude')
+		},
+		{
+			title: 'Imóveis',
+			dataIndex: 'properties',
+			key: 'properties',
+			...getColumnSearchProps('properties')
+		},
+		{
+			title: 'Grupo',
+			dataIndex: 'group',
+			key: 'group',
+			...getColumnSearchProps('group')
+		},
+		{
+			title: 'Fazenda Legal',
+			dataIndex: 'legal',
+			key: 'legal',
+			...getColumnSearchProps('legal')
+		}
+	];
+
+	const handleSearch = (selectedKeys, confirm, dataIndex) => {
+		confirm();
+		setSearchText(selectedKeys[0]);
+		setSearchColumn(dataIndex);
+	};
+	const handleReset = (clearFilters) => {
+		clearFilters();
+		setSearchText('');
+	};
+	const propertyColumns = [
+		{
+			title: 'Imóvel',
+			dataIndex: 'property',
+			key: 'property',
+			...getColumnSearchProps('property')
+		},
+		{
+			title: 'Localização',
+			dataIndex: 'location',
+			key: 'location',
+			...getColumnSearchProps('location')
+		},
+		{
+			title: 'Latitude | Longitude',
+			dataIndex: 'longitude',
+			key: 'longitude',
+			...getColumnSearchProps('longitude')
+		},
+		{
+			title: 'Documentos',
+			dataIndex: 'documents',
+			key: 'documents',
+			...getColumnSearchProps('documents')
+		}
+	];
 
 	return (
 		<div className="user-details pb-5">
@@ -336,9 +517,9 @@ export function UserDetails(props) {
 					}}
 				/>
 			</div>
-			<h1 className="heading-light extra-top-margin">Permissões - Aplicativo (Imóveis)</h1>
-			<div className="d-flex justify-content-between mt-4">
-				<SearchBar />
+			<h1 className="heading-light extra-top-margin">Permissões - Aplicativo (FAZENDAS)</h1>
+			<div className="d-flex justify-content-end mt-4">
+				{/* <SearchBar /> */}
 				<CheckBox
 					text={'Selecionar Todos'}
 					checked={allCheckbox}
@@ -361,6 +542,41 @@ export function UserDetails(props) {
 					}}
 				/>
 			</div>
+			<Table
+				onRow={(record, rowIndex) => {
+					return {
+						onClick: (event) => {
+							History.push({ pathname: `/farm-details/${record.key}` });
+						}, // click row
+						onDoubleClick: (event) => {}, // double click row
+						onContextMenu: (event) => {}, // right button click row
+						onMouseEnter: (event) => {}, // mouse enter row
+						onMouseLeave: (event) => {} // mouse leave row
+					};
+				}}
+				dataSource={farms}
+				columns={columns}
+				className="farms-table"
+			/>
+			<h1 className="heading-light extra-top-margin">Permissões - Aplicativo (Imóveis)</h1>
+			<Table
+				onRow={(record, rowIndex) => {
+					return {
+						onClick: (event) => {
+							// History.push({
+							// 	pathname: `/property-details/${singularDetailsState.name}/farm/${record.key}`
+							// });
+						}, // click row
+						onDoubleClick: (event) => {}, // double click row
+						onContextMenu: (event) => {}, // right button click row
+						onMouseEnter: (event) => {}, // mouse enter row
+						onMouseLeave: (event) => {} // mouse leave row
+					};
+				}}
+				dataSource={properties}
+				columns={propertyColumns}
+				className="farms-table"
+			/>
 			{passwordModalVisibility ? (
 				<OwnerSignupModal
 					visible={true}

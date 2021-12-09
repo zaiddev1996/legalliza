@@ -12,7 +12,7 @@ import { cloneDeep } from 'lodash';
 import { usePropertyManagement } from '../../hooks/properties/usePropertyManagement';
 import { useUsersManagement } from '../../hooks/users/userUsersManagement';
 
-export function AddOwnerModal({ visible, propertyId, changeVisibility }) {
+export function AddOwnerModal({ visible, propertyId, changeVisibility, remainingOwnership }) {
 	const [ allUsers, setAllUsers ] = useState([]);
 	const [ loading, setLoading ] = useState(false);
 	const [ selectedUserId, setSelectedUserId ] = useState();
@@ -22,6 +22,7 @@ export function AddOwnerModal({ visible, propertyId, changeVisibility }) {
 
 	useEffect(
 		() => {
+			console.log(remainingOwnership);
 			setLoading(true);
 			setAllUsers([]);
 			getAllUsers()
@@ -104,16 +105,20 @@ export function AddOwnerModal({ visible, propertyId, changeVisibility }) {
 
 	const onConfirm = () => {
 		if (percentage > 0) {
-			setLoading(true);
-			addNewOwner(propertyId, { userId: selectedUserId, percentage: percentage })
-				.then(() => {
-					message.success('Owner Added');
-					setLoading(false);
-					changeVisibility();
-				})
-				.catch(() => {
-					message.error('Some error happened');
-				});
+			if (percentage > remainingOwnership) {
+				message.error(`Percentage shouldn't be more than ${remainingOwnership}`);
+			} else {
+				setLoading(true);
+				addNewOwner(propertyId, { userId: selectedUserId, percentage: percentage })
+					.then(() => {
+						message.success('Owner Added');
+						setLoading(false);
+						changeVisibility();
+					})
+					.catch(() => {
+						message.error('Some error happened');
+					});
+			}
 		}
 
 		// console.log(farmIdsArray);
@@ -127,6 +132,7 @@ export function AddOwnerModal({ visible, propertyId, changeVisibility }) {
 				footer={null}
 				visible={visible}
 				destroyOnClose={true}
+				width={620}
 				bodyStyle={{
 					background: 'rgba(52, 52, 52, 0.0)',
 					borderRadius: '8px'
@@ -134,7 +140,10 @@ export function AddOwnerModal({ visible, propertyId, changeVisibility }) {
 				style={{
 					backgroundColor: 'rgba(52, 52, 52, 0.0)'
 				}}
-				wrapClassName="modal-farm-access"
+				wrapClassName="modal-property-access"
+				onCancel={() => {
+					changeVisibility();
+				}}
 			>
 				<div>
 					<div className="custom-modal-header-2 d-flex">

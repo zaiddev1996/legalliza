@@ -15,7 +15,8 @@ import {
 	deleteDoc,
 	increment,
 	updateDoc,
-	arrayUnion
+	arrayUnion,
+	where
 } from 'firebase/firestore';
 import { usePropertyManagement } from '../properties/usePropertyManagement';
 
@@ -146,6 +147,38 @@ export function useFarmManagement() {
 				});
 		});
 
+	const getMultipleFarms = (userId) =>
+		new Promise((resolve, reject) => {
+			const q = query(
+				collection(db, 'farms'),
+				where('farmAccess', 'array-contains', userId),
+				orderBy('createdAt', 'desc')
+			);
+			getDocs(q)
+				.then((querySnapshot) => {
+					let farmList = [];
+					querySnapshot.forEach((doc) => {
+						const farmData = doc.data();
+						const data = {
+							key: doc.id,
+							farm: farmData.name,
+							location: farmData.country,
+							longitude: `${farmData.latDegree}º${farmData.latMinutes}’${farmData.latSeconds}’’${farmData.latDirection} | ${farmData.longDegree}º${farmData.longMinutes}’${farmData.longSeconds}’’${farmData.longDirection}`,
+							properties: farmData.propertyCount ? farmData.propertyCount : 0,
+							legal: `${farmData.legalFarm}%`,
+							group: farmData.group
+						};
+						farmList.push(data);
+					});
+					resolve(farmList);
+					// console.log(farmList);
+				})
+				.catch((error) => {
+					reject(error);
+					console.log(error);
+				});
+		});
+
 	return {
 		addNewFarm,
 		getAllFarms,
@@ -154,6 +187,7 @@ export function useFarmManagement() {
 		deleteFarm,
 		changePropertyCount,
 		updateGroupArray,
-		getGroupArray
+		getGroupArray,
+		getMultipleFarms
 	};
 }

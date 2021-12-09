@@ -185,7 +185,7 @@ export function GrantPropertyAccessModal({ visible, id, changeVisibility }) {
 				style={{
 					backgroundColor: 'rgba(52, 52, 52, 0.0)'
 				}}
-				wrapClassName="custom-dial"
+				wrapClassName="property-access-modal"
 			>
 				<div>
 					<div className="custom-modal-header-2 d-flex">
@@ -196,8 +196,8 @@ export function GrantPropertyAccessModal({ visible, id, changeVisibility }) {
 						<text className="select-docs-text">
 							Selecione os imóveis que o usuário pode visualizar no aplicativo:
 						</text>
-						<div className=" d-flex justify-content-between searchbar-div">
-							<SearchBar className="modal-searchbar" />
+						<div className=" d-flex justify-content-end searchbar-div">
+							{/* <SearchBar className="modal-searchbar" /> */}
 							<CheckBox
 								text={'Selecionar Todos'}
 								className="align-self-center"

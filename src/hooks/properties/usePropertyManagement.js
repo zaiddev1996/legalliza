@@ -27,7 +27,17 @@ export function usePropertyManagement() {
 			addDoc(collection(db, 'properties'), {
 				...propertyDetails,
 				createdAt: Timestamp.fromDate(new Date()),
-				farmId: farmId
+				farmId: farmId,
+				ruralAreas: [
+					{ value: 0, percentage: 0, comments: '' },
+					{ value: 0, percentage: 0, comments: '' },
+					{ value: 0, percentage: 0, comments: '' },
+					{ value: 0, percentage: 0, comments: '' },
+					{ value: 0, percentage: 0, comments: '' },
+					{ value: 0, percentage: 0, comments: '' },
+					{ value: 0, percentage: 0, comments: '' },
+					{ value: 0, percentage: 0, comments: '' }
+				]
 			})
 				.then((doc) => {
 					changePropertyCount(farmId, 1)
@@ -102,7 +112,7 @@ export function usePropertyManagement() {
 							location: propertyData.country,
 							longitude: `${propertyData.latDegree}º${propertyData.latMinutes}’${propertyData.latSeconds}’’${propertyData.latDirection} | ${propertyData.longDegree}º${propertyData.longMinutes}’${propertyData.longSeconds}’’${propertyData.longDirection}`,
 							users: '3',
-							documents: propertyData.documentCount,
+							documents: propertyData.documentCount ? propertyData.documentCount : 0,
 							farmId: propertyData.farmId
 						};
 						propertyList.push(data);
@@ -212,15 +222,11 @@ export function usePropertyManagement() {
 				});
 		});
 
-	const addNewRuralArea = (propertyId, areaDetails) =>
+	const updateRuralArea = (propertyId, areaDetails) =>
 		new Promise((resolve, reject) => {
-			addDoc(collection(db, 'properties', propertyId, 'ruralArea'), {
-				...areaDetails,
-				createdAt: Timestamp.fromDate(new Date())
-			})
+			setDoc(doc(db, 'properties', `${propertyId + ''}`), { ruralAreas: areaDetails }, { merge: true })
 				.then((doc) => {
-					resolve(doc.id);
-					console.log(doc);
+					resolve();
 				})
 				.catch((error) => {
 					reject(error);
@@ -230,25 +236,9 @@ export function usePropertyManagement() {
 
 	const getRuralAreas = (propertyId) =>
 		new Promise((resolve, reject) => {
-			const q = query(collection(db, 'properties', propertyId, 'ruralArea'), orderBy('createdAt', 'desc'));
-			getDocs(q)
-				.then((querySnapshot) => {
-					let propertyList = [];
-					querySnapshot.forEach((doc) => {
-						const propertyData = doc.data();
-						const data = {
-							key: doc.id,
-							area: propertyData.area,
-							value: propertyData.value,
-							percentage: propertyData.percentage,
-							type: propertyData.type,
-							comments: propertyData.comment,
-							color: propertyData.color
-						};
-						propertyList.push(data);
-					});
-					resolve(propertyList);
-					// console.log(farmList);
+			getDoc(doc(db, 'properties', `${propertyId + ''}`))
+				.then((doc) => {
+					resolve(doc.data().ruralAreas);
 				})
 				.catch((error) => {
 					reject(error);
@@ -267,7 +257,7 @@ export function usePropertyManagement() {
 		addNewOwner,
 		getPropertyOwners,
 		deleteOwner,
-		addNewRuralArea,
+		updateRuralArea,
 		getRuralAreas
 	};
 }

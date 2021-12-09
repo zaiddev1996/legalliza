@@ -36,3 +36,12 @@
 	background-color: #d8d8d8;
 	margin-top: 32px;
 }
+
+.document-section-main .farmers-table::-webkit-scrollbar {
+	display: none;
+}
+
+.farmers-table {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}

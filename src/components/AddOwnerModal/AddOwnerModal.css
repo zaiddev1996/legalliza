@@ -8,6 +8,7 @@
 	> tr
 	> th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
 	background-color: transparent;
+	overflow: hidden;
 }
 
 .farmers-table .ant-table-thead > tr > th {
@@ -32,45 +33,46 @@
 	background-color: #717171 !important;
 }
 
-.custom-dial .ant-modal-content {
+.modal-property-access .ant-modal-content {
 	background-color: transparent !important;
+	margin-right: 0% !important;
 }
-.custom-dial .ant-modal-body {
+.modal-property-access .ant-modal-body {
 	padding: 0% !important;
 }
 
-.custom-dial .custom-modal-header {
+.modal-property-access .custom-modal-header {
 	background-color: white;
 	width: 540px;
 	height: 54px;
 	border-radius: 8px;
 }
 
-.custom-dial .custom-modal-header-2 {
+.modal-property-access .custom-modal-header-2 {
 	background-color: white;
 	width: 640px;
 	height: 54px;
 	border-radius: 8px;
 }
 
-.custom-dial .header-icon-modal {
+.modal-property-access .header-icon-modal {
 	margin-left: 32px;
 }
 
-.custom-dial .header-title-text {
+.modal-property-access .header-title-text {
 	font-family: OpenSans-SemiBold;
 	font-size: 19px;
 	color: #46a23e;
 	margin-left: 12px;
 }
-.custom-dial .custom-modal-body {
+.modal-property-access .custom-modal-body {
 	padding: 32px 32px 20px 32px;
 	background-color: white;
 	width: 540px;
 	margin-top: 12px;
 	border-radius: 8px;
 }
-.custom-dial .signup-inputs {
+.modal-property-access .signup-inputs {
 	/* margin-top: 16px; */
 	border: solid;
 	border-color: #aaaaaade !important;
@@ -84,37 +86,37 @@
 	margin-bottom: 0px;
 }
 
-.custom-dial .signup-inputs:hover {
+.modal-property-access .signup-inputs:hover {
 	border-color: #aaaaaa8e;
 }
 
-.custom-dial .signup-inputs:focus {
+.modal-property-access .signup-inputs:focus {
 	border-color: #118960 !important;
 	box-shadow: #118960;
 }
-.custom-dial .custom-modal-body-2 {
+.modal-property-access .custom-modal-body-2 {
 	padding: 32px;
 	background-color: white;
 	width: 640px;
 	margin-top: 12px;
 	border-radius: 8px;
 }
-.custom-dial .select-docs-text {
+.modal-property-access .select-docs-text {
 	color: #2f2f2f;
 	font-size: 13px;
 	font-family: OpenSans-Regular;
 }
-.custom-dial .checkbox-style {
+.modal-property-access .checkbox-style {
 	font-size: 13px;
 	font-family: OpenSans-Regular;
 	color: #2f2f2f;
 	margin-top: 19px;
 }
 
-.custom-dial .documents-col {
+.modal-property-access .documents-col {
 	padding-left: 0%;
 }
-.custom-dial .confirm-btn-modal {
+.modal-property-access .confirm-btn-modal {
 	background-color: #46a23e;
 	color: white;
 	width: 112px;
@@ -125,11 +127,11 @@
 	margin-top: 20px;
 }
 
-.custom-dial .confirm-btn-modal:hover {
+.modal-property-access .confirm-btn-modal:hover {
 	background-color: #46a23e;
 }
 
-.custom-dial .cancel-btn-modal {
+.modal-property-access .cancel-btn-modal {
 	background-color: #d8d8d8;
 	color: #717171;
 	width: 112px;
@@ -139,35 +141,35 @@
 	margin-left: 8px;
 	margin-top: 20px;
 }
-.custom-dial .cancel-btn-modal:hover {
+.modal-property-access .cancel-btn-modal:hover {
 	background-color: #d8d8d8;
 }
-.custom-dial .ant-modal-close {
-	visibility: hidden;
+.modal-property-access .ant-modal-close {
+	visibility: visible;
 }
-.custom-dial .searchbar-div {
+.modal-property-access .searchbar-div {
 	margin-top: 16px;
 }
-.custom-dial .modal-searchbar {
+.modal-property-access .modal-searchbar {
 	margin-right: 30px;
 	width: 320px;
 }
-.custom-dial .farmers-table .permission-field-1 {
+.modal-property-access .farmers-table .permission-field-1 {
 	color: #2f2f2f;
 	font-size: 13px;
 	margin-left: 23px;
 	font-family: OpenSans-Regular;
 }
-.custom-dial .farmers-table .permission-field-2 {
+.modal-property-access .farmers-table .permission-field-2 {
 	color: #ababab;
 	font-size: 11px;
 	margin-left: 23px;
 	font-family: OpenSans-Regular;
 }
-.custom-dial .farmers-table .delete-btn {
+.modal-property-access .farmers-table .delete-btn {
 	cursor: pointer;
 }
 
-.custom-dial .farmers-table-2 {
+.modal-property-access .farmers-table-2 {
 	overflow: hidden;
 }

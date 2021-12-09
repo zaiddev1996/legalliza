@@ -32,67 +32,67 @@
 	background-color: #717171 !important;
 }
 
-.modal-farm-access .ant-modal-content {
+.property-access-modal .ant-modal-content {
 	background-color: transparent !important;
 }
-.modal-farm-access .ant-modal-body {
+.property-access-modal .ant-modal-body {
 	padding: 0% !important;
 }
 
-.modal-farm-access .custom-modal-header {
+.property-access-modal .custom-modal-header {
 	background-color: white;
 	width: 540px;
 	height: 54px;
 	border-radius: 8px;
 }
 
-.modal-farm-access .custom-modal-header-2 {
+.property-access-modal .custom-modal-header-2 {
 	background-color: white;
 	width: 640px;
 	height: 54px;
 	border-radius: 8px;
 }
 
-.modal-farm-access .header-icon-modal {
+.property-access-modal .header-icon-modal {
 	margin-left: 32px;
 }
 
-.modal-farm-access .header-title-text {
+.property-access-modal .header-title-text {
 	font-family: OpenSans-SemiBold;
 	font-size: 19px;
 	color: #46a23e;
 	margin-left: 12px;
 }
-.modal-farm-access .custom-modal-body {
+.property-access-modal .custom-modal-body {
 	padding: 32px 32px 20px 32px;
 	background-color: white;
 	width: 540px;
 	margin-top: 12px;
 	border-radius: 8px;
 }
-.modal-farm-access .custom-modal-body-2 {
+.property-access-modal .custom-modal-body-2 {
 	padding: 32px;
 	background-color: white;
 	width: 640px;
 	margin-top: 12px;
 	border-radius: 8px;
 }
-.modal-farm-access .select-docs-text {
+.property-access-modal .select-docs-text {
 	color: #2f2f2f;
 	font-size: 13px;
 	font-family: OpenSans-Regular;
 }
-.modal-farm-access .checkbox-style {
+.property-access-modal .checkbox-style {
 	font-size: 13px;
 	font-family: OpenSans-Regular;
 	color: #2f2f2f;
 	margin-top: 19px;
 }
 
-.modal-farm-access .documents-col {
+.property-access-modal .documents-col {
 	padding-left: 0%;
 }
-.modal-farm-access .confirm-btn-modal {
+.property-access-modal .confirm-btn-modal {
 	background-color: #46a23e;
 	color: white;
 	width: 112px;
@@ -103,11 +103,11 @@
 	margin-top: 20px;
 }
 
-.modal-farm-access .confirm-btn-modal:hover {
+.property-access-modal .confirm-btn-modal:hover {
 	background-color: #46a23e;
 }
 
-.modal-farm-access .cancel-btn-modal {
+.property-access-modal .cancel-btn-modal {
 	background-color: #d8d8d8;
 	color: #717171;
 	width: 112px;
@@ -117,35 +117,35 @@
 	margin-left: 8px;
 	margin-top: 20px;
 }
-.modal-farm-access .cancel-btn-modal:hover {
+.property-access-modal .cancel-btn-modal:hover {
 	background-color: #d8d8d8;
 }
-.modal-farm-access .ant-modal-close {
+.property-access-modal .ant-modal-close {
 	visibility: hidden;
 }
-.modal-farm-access .searchbar-div {
+.property-access-modal .searchbar-div {
 	margin-top: 16px;
 }
-.modal-farm-access .modal-searchbar {
+.property-access-modal .modal-searchbar {
 	margin-right: 30px;
 	width: 320px;
 }
-.modal-farm-access .farmers-table .permission-field-1 {
+.property-access-modal .farmers-table .permission-field-1 {
 	color: #2f2f2f;
 	font-size: 13px;
 	margin-left: 23px;
 	font-family: OpenSans-Regular;
 }
-.modal-farm-access .farmers-table .permission-field-2 {
+.property-access-modal .farmers-table .permission-field-2 {
 	color: #ababab;
 	font-size: 11px;
 	margin-left: 23px;
 	font-family: OpenSans-Regular;
 }
-.modal-farm-access .farmers-table .delete-btn {
+.property-access-modal .farmers-table .delete-btn {
 	cursor: pointer;
 }
 
-.modal-farm-access .farmers-table-2 {
+.property-access-modal .farmers-table-2 {
 	overflow: hidden;
 }
