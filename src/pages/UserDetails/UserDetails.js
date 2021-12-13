@@ -61,7 +61,6 @@ export function UserDetails(props) {
 		getAllFarmsProperties('')
 			.then((propertiesList) => {
 				const list = [];
-
 				if (accessArray) {
 					for (let i = 0; i < propertiesList.length; i++) {
 						if (accessArray.includes(propertiesList[i].key)) {

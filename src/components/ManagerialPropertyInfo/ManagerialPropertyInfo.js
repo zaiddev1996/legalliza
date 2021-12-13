@@ -78,27 +78,29 @@ export function ManagerialPropertyInfo({ propertyId }) {
 	// };
 	const calculateTotals = (list) => {
 		var data = [];
-		data.push({
-			type: 'Consolidada',
-			value:
-				parseFloat(list[0].value) +
-				parseFloat(list[1].value) +
-				parseFloat(list[2].value) +
-				parseFloat(list[3].value) +
-				parseFloat(list[4].value),
-			percentage:
-				parseFloat(list[0].percentage) +
-				parseFloat(list[1].percentage) +
-				parseFloat(list[2].percentage) +
-				parseFloat(list[3].percentage) +
-				parseFloat(list[4].percentage)
-		});
-		data.push({
-			type: 'Ambiental',
-			value: list[5].value + list[6].value + list[7].value,
-			percentage: list[5].percentage + list[6].percentage + list[7].percentage
-		});
-		setAreaTypeTotalList(data);
+		if (list) {
+			data.push({
+				type: 'Consolidada',
+				value:
+					parseFloat(list[0].value) +
+					parseFloat(list[1].value) +
+					parseFloat(list[2].value) +
+					parseFloat(list[3].value) +
+					parseFloat(list[4].value),
+				percentage:
+					parseFloat(list[0].percentage) +
+					parseFloat(list[1].percentage) +
+					parseFloat(list[2].percentage) +
+					parseFloat(list[3].percentage) +
+					parseFloat(list[4].percentage)
+			});
+			data.push({
+				type: 'Ambiental',
+				value: list[5].value + list[6].value + list[7].value,
+				percentage: list[5].percentage + list[6].percentage + list[7].percentage
+			});
+			setAreaTypeTotalList(data);
+		}
 	};
 
 	function onUploadFile(file) {
@@ -237,7 +239,7 @@ export function ManagerialPropertyInfo({ propertyId }) {
 					className={'cell-input'}
 					onKeyPress={(e) => {
 						if (e.code == 'Enter') {
-							if (e.target.value >= 0) {
+							if (e.target.value >= 0 && e.target.value != '') {
 								setLoading(true);
 								ruralAreaList[index] = { ...ruralAreaList[index], value: e.target.value };
 								updateRuralArea(propertyId, ruralAreaList)
@@ -266,7 +268,7 @@ export function ManagerialPropertyInfo({ propertyId }) {
 					className={'cell-input'}
 					onKeyPress={(e) => {
 						if (e.code == 'Enter') {
-							if (e.target.value.replace('%', '') >= 0) {
+							if (e.target.value.replace('%', '') >= 0 && e.target.value.replace('%', '') != '') {
 								setLoading(true);
 								ruralAreaList[index] = {
 									...ruralAreaList[index],
