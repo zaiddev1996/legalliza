@@ -1,6 +1,7 @@
 import { getAuth } from 'firebase/auth';
 import { message } from 'antd';
 import History from '../../@history';
+import axios from 'axios';
 import {
 	doc,
 	getDoc,
@@ -179,6 +180,32 @@ export function useFarmManagement() {
 				});
 		});
 
+	const getStates = () =>
+		new Promise((resolve, reject) => {
+			axios
+				.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/%7BSC%7D/municipios`)
+				.then(function(response) {
+					console.log(response);
+				})
+				.catch(function(error) {
+					console.log(error);
+					reject('Error: ', error);
+				});
+		});
+
+	const getCities = () =>
+		new Promise((resolve, reject) => {
+			axios
+				.get(`https://servicodados.ibge.gov.br/api/docs/localidades#api-Municipios-municipiosGet`)
+				.then(function(response) {
+					console.log(response);
+				})
+				.catch(function(error) {
+					console.log(error);
+					reject('Error: ', error);
+				});
+		});
+
 	return {
 		addNewFarm,
 		getAllFarms,
@@ -188,6 +215,8 @@ export function useFarmManagement() {
 		changePropertyCount,
 		updateGroupArray,
 		getGroupArray,
-		getMultipleFarms
+		getMultipleFarms,
+		getStates,
+		getCities
 	};
 }

@@ -49,58 +49,11 @@ export function OwnerSignupModal({ visible, changeVisibility, userId }) {
 			<div className="ms-0 mr-0 container signup-main">
 				<div className="row">
 					<div>
-						<div className="d-flex justify-content-between signup-header">
-							{/* <div>
-							<Link to="/" className="d-flex flex-wrap align-items-center logo-div">
-								<img height="26" width="29" src={Logo} alt="logo" className="mr-2" />
-								<p className="mb-0 font-weight-bold logo-text">
-									Babbling<span className="text-brooks">Brook</span>
-								</p>
-							</Link>
-						</div> */}
-						</div>
+						<div className="d-flex justify-content-between signup-header" />
 						<div className="d-flex justify-content-center flex-column">
 							<p className="create-acc-heading">Change Password</p>
 							<Form onFinish={(e) => onSignup(e)} className="signup-form">
 								<div className="d-flex flex-column align-items-center inputs-div">
-									{/* <Form.Item
-										name="name"
-										rules={[
-											{
-												required: true,
-												message: 'Please input your First Name!'
-											}
-										]}
-									>
-										<Input placeholder="Full Name" className="signup-inputs" />
-									</Form.Item>
-									<Form.Item
-										name="email_address"
-										rules={[
-											{
-												type: 'email',
-												message: 'The input is not valid E-mail!'
-											},
-											{
-												required: true,
-												message: 'Please input your E-mail!'
-											}
-										]}
-									>
-										<Input placeholder="Email Address" className="signup-inputs" />
-									</Form.Item>
-									<Form.Item
-										name="percentage"
-										rules={[
-											{
-												required: true,
-												message: "Please input owner's percentage"
-											}
-										]}
-									>
-										<Input placeholder="Percentage" type={'number'} className="signup-inputs" />
-									</Form.Item> */}
-
 									<Form.Item
 										name="password"
 										rules={[

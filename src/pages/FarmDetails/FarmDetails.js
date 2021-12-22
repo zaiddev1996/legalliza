@@ -20,7 +20,16 @@ import { PlusOutlined } from '@ant-design/icons';
 import { list } from '@firebase/storage';
 
 export function FarmDetails(props) {
-	const { addNewFarm, getFarm, updateFarm, deleteFarm, updateGroupArray, getGroupArray } = useFarmManagement();
+	const {
+		addNewFarm,
+		getFarm,
+		updateFarm,
+		deleteFarm,
+		updateGroupArray,
+		getGroupArray,
+		getStates,
+		getCities
+	} = useFarmManagement();
 	const { getAllProperties } = usePropertyManagement();
 	const { farmSingularDetails } = useFarmDetails();
 	const { validateDetails } = useDetailsValidation();
@@ -137,6 +146,8 @@ export function FarmDetails(props) {
 
 	useEffect(() => {
 		populateGroupList();
+		getStates();
+		getCities();
 		if (props.match.params.id != undefined) {
 			setLoading(true);
 			setFarmId(props.match.params.id);
@@ -285,8 +296,8 @@ export function FarmDetails(props) {
 							singularDetailsState.state = e;
 						}}
 					>
-						<Option value="SC">SC</Option>
-						<Option value="WC">WC</Option>
+						{/* <Option value="SC">SC</Option>
+						<Option value="WC">WC</Option> */}
 					</Select>
 				</div>
 				<div className="d-flex flex-column detail-div-left-margin">
@@ -298,8 +309,8 @@ export function FarmDetails(props) {
 							singularDetailsState.country = e;
 						}}
 					>
-						<Option value="Jaraguá do Sul">Jaraguá do Sul</Option>
-						<Option value="Jaraguá do Sull">Jaraguá do Sul</Option>
+						{/* <Option value="Jaraguá do Sul">Jaraguá do Sul</Option>
+						<Option value="Jaraguá do Sull">Jaraguá do Sul</Option> */}
 					</Select>
 				</div>
 				<div className="d-flex flex-column detail-div-left-margin">
